@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Establecimiento;
+use App\Establishment;
 use Illuminate\Http\Request;
 
-class EstablecimientoController extends Controller
+class EstablishmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class EstablecimientoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Establecimiento  $establecimiento
+     * @param  \App\Establishment  $Establishment
      * @return \Illuminate\Http\Response
      */
-    public function show(Establecimiento $establecimiento)
+    public function show(Establishment $Establishment)
     {
         //
     }
@@ -52,10 +52,10 @@ class EstablecimientoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Establecimiento  $establecimiento
+     * @param  \App\Establishment  $Establishment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Establecimiento $establecimiento)
+    public function edit(Establishment $Establishment)
     {
         //
     }
@@ -64,10 +64,10 @@ class EstablecimientoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Establecimiento  $establecimiento
+     * @param  \App\Establishment  $Establishment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Establecimiento $establecimiento)
+    public function update(Request $request, Establishment $Establishment)
     {
         //
     }
@@ -75,10 +75,10 @@ class EstablecimientoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Establecimiento  $establecimiento
+     * @param  \App\Establishment  $Establishment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Establecimiento $establecimiento)
+    public function destroy(Establishment $Establishment)
     {
         //
     }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Registro;
+use App\Record;
 use Illuminate\Http\Request;
 
-class RegistroController extends Controller
+class RecordController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class RegistroController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Registro  $registro
+     * @param  \App\Record  $Record
      * @return \Illuminate\Http\Response
      */
-    public function show(Registro $registro)
+    public function show(Record $Record)
     {
         //
     }
@@ -52,10 +52,10 @@ class RegistroController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Registro  $registro
+     * @param  \App\Record  $Record
      * @return \Illuminate\Http\Response
      */
-    public function edit(Registro $registro)
+    public function edit(Record $Record)
     {
         //
     }
@@ -64,10 +64,10 @@ class RegistroController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Registro  $registro
+     * @param  \App\Record  $Record
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Registro $registro)
+    public function update(Request $request, Record $Record)
     {
         //
     }
@@ -75,10 +75,10 @@ class RegistroController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Registro  $registro
+     * @param  \App\Record  $Record
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Registro $registro)
+    public function destroy(Record $Record)
     {
         //
     }

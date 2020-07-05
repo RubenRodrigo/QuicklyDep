@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Publicacion;
+use App\Adress;
 use Illuminate\Http\Request;
 
-class PublicacionController extends Controller
+class AdressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class PublicacionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Publicacion  $publicacion
+     * @param  \App\Adress  $Adress
      * @return \Illuminate\Http\Response
      */
-    public function show(Publicacion $publicacion)
+    public function show(Adress $Adress)
     {
         //
     }
@@ -52,10 +52,10 @@ class PublicacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Publicacion  $publicacion
+     * @param  \App\Adress  $Adress
      * @return \Illuminate\Http\Response
      */
-    public function edit(Publicacion $publicacion)
+    public function edit(Adress $Adress)
     {
         //
     }
@@ -64,10 +64,10 @@ class PublicacionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Publicacion  $publicacion
+     * @param  \App\Adress  $Adress
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Publicacion $publicacion)
+    public function update(Request $request, Adress $Adress)
     {
         //
     }
@@ -75,10 +75,10 @@ class PublicacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Publicacion  $publicacion
+     * @param  \App\Adress  $Adress
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Publicacion $publicacion)
+    public function destroy(Adress $Adress)
     {
         //
     }
