@@ -21,23 +21,33 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex flex-column bd-highlight">
+            <div class="container bd-highlight">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="img/Logo.png" height="50px">                    
                 </a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+                
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
 
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav flex-grow-1 bd-highlight">                        
+                        <form class="form-inline">
+                            <input class="form-control col-7" type="search" placeholder="Que desea buscar?">
+                            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Buscar</button>
+                        </form>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                        <!-- Post Link -->
+                        <li>
+                            <a class="navbar-brand" href="">Publicar una vivienda</a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -69,6 +79,43 @@
                         @endguest
                     </ul>
                 </div>
+            </div>
+            <div class="container bd-highlight">
+                
+                    <div class="dropdown bd-highlight">
+                    <form action="">
+                        <button type="button" class="btn dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                        Venta
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                        {{-- @foreach ($sellCities as $city) --}}
+                            <a class="dropdown-item" href="#">Arequipa</a>
+                            <a class="dropdown-item" href="#">Lima</a>
+                            <a class="dropdown-item" href="#">Cusco</a>
+                            <a class="dropdown-item" href="#">...</a>
+                        {{-- @endforeach --}}
+                        </div>
+                    </form>
+                    </div>
+                    <div class="dropdown bd-highlight">
+                        <form action="">
+                            <button type="button" class="btn dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                            Alquiler
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                            {{-- @foreach ($rentCities as $city) --}}
+                                <a class="dropdown-item" href="#">Arequipa</a>
+                                <a class="dropdown-item" href="#">Lima</a>
+                                <a class="dropdown-item" href="#">Cusco</a>
+                                <a class="dropdown-item" href="#">...</a>
+                            {{-- @endforeach --}}
+                            </div>
+                        </form>
+                    </div>
+                    <div class="ml-auto p-2 bd-highlight">
+                        <a href="" class="text-body">Ayuda</a>
+                    </div>
+                             
             </div>
         </nav>
 
