@@ -4,7 +4,7 @@ namespace App;
 
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class Comentario extends Model
+class Comment extends Model
 {
     protected $fillable= [
         'contenido', 'id_comentario_respuesta'

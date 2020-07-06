@@ -4,10 +4,10 @@ namespace App;
 
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class Establecimiento extends Model
+class Establishment extends Model
 {
     protected $fillable= [
-        'precio', 'imagenes',
+        'precio', 'imagen',
     ];
 
     public function post()
@@ -15,7 +15,7 @@ class Establecimiento extends Model
         return $this->belongsTo('App\Post');
     }
 
-    public function Adresses()
+    public function adresses()
     {
         return $this->embedsMany('App\Adress');
     }

@@ -15,7 +15,7 @@ class UserCollectionSeeder extends Seeder
             ->create()
             ->each( function ($user){
                 $user->posts()->createMany(
-                    factory(App\Post::class, 5)->make()->toArray()
+                    factory(App\Post::class, 2)->make()->toArray()
                 );  
             });
     }
