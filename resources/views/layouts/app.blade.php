@@ -46,7 +46,7 @@
 
                         <!-- Post Link -->
                         <li>
-                            <a class="navbar-brand" href="">Publicar una vivienda</a>
+                            <a class="navbar-brand" href="{{ url('/posts/create') }}">Publicar una vivienda</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest
