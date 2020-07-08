@@ -7,7 +7,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class Adress extends Model
 {
     protected $fillable= [
-        'pais', 'provincia', 'distrito', 'direccion',
+        'pais', 'ciudad', 'distrito', 'direccion',
     ];
 
     public function establishment()

@@ -1,0 +1,15 @@
+<?php
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+use App\Adress;
+use Faker\Generator as Faker;
+
+$factory->define(Adress::class, function (Faker $faker) {
+    return [
+        'pais' => $faker->country(),
+        'ciudad' => $faker->city(),
+        'distrito' => $faker->district(),
+        'direccion' => $faker->adress(),
+    ];
+});
