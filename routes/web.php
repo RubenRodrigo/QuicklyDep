@@ -23,3 +23,7 @@ Route::get('/post/{tipo}/{pais?}', 'PostController@showPostVentaPais')->name('po
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Rutas de usuarios
+Route::patch('/users/{id}', 'UserController@update')->name('users.update');
+Route::get('/users/{id}/edit', 'UserController@edit')->name('users.edit');

@@ -37,7 +37,7 @@
           </form>
         @endauth
         @guest
-          <p>si deseas comentar <a href="{{ action('Auth\LoginController@showLoginform') }}">inicia session</a> o <a href="{{ action('Auth\RegisterController@showRegistrationForm') }}">registrate</a></p>
+          <p>si deseas comentar <a href="{{ action('Auth\LoginController@showLoginForm') }}">inicia session</a> o <a href="{{ action('Auth\RegisterController@showRegistrationForm') }}">registrate</a></p>
         @endguest
         @forelse ($post->comments as $comment)
           <div class="card">
