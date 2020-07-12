@@ -20,7 +20,7 @@ class UserCollectionSeeder extends Seeder
                     factory(App\Post::class, 2)->make()->toArray()
                 )
                 ->each( function($post){
-                    $post->establishments()->createMany(
+                    $post->establishment()->createMany(
                         factory(App\Establishment::class, 1)->make()->toArray()
                     );
                 });  
@@ -35,16 +35,6 @@ class UserCollectionSeeder extends Seeder
                 'rol' => 'c',
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
-            ])
-            ->each( function ($user){
-                $user->posts()->createMany(
-                    factory(App\Post::class, 2)->make()->toArray()
-                )
-                ->each( function($post){
-                    $post->establishments()->createMany(
-                        factory(App\Establishment::class, 1)->make()->toArray()
-                    );
-                });  
-            });
+            ]);
     }
 }

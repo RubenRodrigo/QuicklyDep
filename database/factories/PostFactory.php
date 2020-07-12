@@ -7,10 +7,11 @@ use App\Establishment;
 use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
+    
     return [
         'nombre' => $faker->sentence(5),
         'descripcion' => $faker->paragraph(3),
-        'tipo' => $faker->sentence(1),
+        'tipo' => $faker->randomElement($array = array ('Alquiler','Venta')),
         // 'establecimiento' => function(){
         //     return factory(Establishment::class)->create();
         // }

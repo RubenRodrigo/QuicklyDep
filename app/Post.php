@@ -12,7 +12,7 @@ class Post extends Model
 
     public function user()
     {
-        return $this->belongTo('App\User');
+        return $this->belongsTo('App\User');
     }
     
     public function comments()
@@ -20,9 +20,9 @@ class Post extends Model
         return $this->embedsMany('App\Comment');
     }
 
-    public function establishments()
+    public function establishment()
     {
-        return $this->embedsMany('App\Establishment');
+        return $this->hasOne('App\Establishment');
     }
     // public function descripcion()
     // {

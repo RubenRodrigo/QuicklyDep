@@ -114,8 +114,8 @@
                         <label for="type">Tipo</label>
                         <select name="type" id="type" class="form-control{{ $errors->has('type') ? ' is-invalid':'' }}">
                             <option selected value="x">Escoge el tipo...</option>
-                            <option value="type">Venta</option>
-                            <option>Alquiler</option>
+                            <option >Venta</option>
+                            <option >Alquiler</option>
                         </select>
                         @if ($errors->has('type'))
                             <span class="invalid-feedback">

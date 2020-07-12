@@ -7,16 +7,16 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class Establishment extends Model
 {
     protected $fillable= [
-        'precio', 'imagen',
+        'pais', 'ciudad', 'distrito', 'direccion', 'precio', 'imagen',
     ];
 
-    public function post()
+    public function posts()
     {
         return $this->belongsTo('App\Post');
     }
 
-    public function adresses()
-    {
-        return $this->embedsMany('App\Adress');
-    }
+    // public function adresses()
+    // {
+    //     return $this->embedsMany('App\Adress');
+    // }
 }

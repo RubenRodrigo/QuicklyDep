@@ -16,12 +16,11 @@
                         <a href="">{{$post->nombre}}</a>
                     </h5>
                 </div>                
-                @foreach($post->establishments as $establishment)
-                <img src="{{ Storage::url($establishment->imagen) }}" class="card-img-top" alt="...">
-                @endforeach
+                <img src="{{ Storage::url($post->establishment->imagen) }}" class="card-img-top" alt="...">
             </div>
         </div>
     </div>
     @endforeach
+    {{ $posts->links()}}
 </div>
 @endsection

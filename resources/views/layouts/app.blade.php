@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex flex-column bd-highlight">
             <div class="container bd-highlight">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="img/Logo.png" height="50px">                    
+                    <img src="{{ Storage::url('posts/Logo.png') }}" height="60px">                    
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -80,38 +80,40 @@
                     </ul>
                 </div>
             </div>
+            
             <div class="container bd-highlight">
                 
                     <div class="dropdown bd-highlight">
-                    <form action="">
                         <button type="button" class="btn dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
                         Venta
                         </button>
+                        
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                        {{-- @foreach ($sellCities as $city) --}}
-                            <a class="dropdown-item" href="#">Arequipa</a>
-                            <a class="dropdown-item" href="#">Lima</a>
-                            <a class="dropdown-item" href="#">Cusco</a>
-                            <a class="dropdown-item" href="#">...</a>
-                        {{-- @endforeach --}}
+                        @php
+                            $paises = App\Establishment::groupBy('pais')->get(['pais'])
+                        @endphp 
+                        <a class="dropdown-item" href="{{route('post.filtro', ['tipo'=> 'Venta'])}}">Todo Ventas</a>                     
+                        @foreach ($paises as $pais)
+                            <a class="dropdown-item" href="{{route('post.filtro', ['tipo'=> 'Venta', 'pais'=>$pais->pais])}}">{{$pais->pais}}</a>
+                        @endforeach
                         </div>
-                    </form>
                     </div>
+
                     <div class="dropdown bd-highlight">
-                        <form action="">
-                            <button type="button" class="btn dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                            Alquiler
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                            {{-- @foreach ($rentCities as $city) --}}
-                                <a class="dropdown-item" href="#">Arequipa</a>
-                                <a class="dropdown-item" href="#">Lima</a>
-                                <a class="dropdown-item" href="#">Cusco</a>
-                                <a class="dropdown-item" href="#">...</a>
-                            {{-- @endforeach --}}
-                            </div>
-                        </form>
+                        <button type="button" class="btn dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                        Alquiler
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                            @php
+                                $paises = App\Establishment::groupBy('pais')->get(['pais'])
+                            @endphp     
+                            <a class="dropdown-item" href="{{route('post.filtro', ['tipo'=> 'Alquiler'])}}">Todo Alquiler</a>                    
+                            @foreach ($paises as $pais)
+                                <a class="dropdown-item" href="{{route('post.filtro', ['tipo'=> 'Alquiler', 'pais'=>$pais->pais])}}">{{$pais->pais}}</a>
+                            @endforeach
+                        </div>
                     </div>
+
                     <div class="ml-auto p-2 bd-highlight">
                         <a href="" class="text-body">Ayuda</a>
                     </div>

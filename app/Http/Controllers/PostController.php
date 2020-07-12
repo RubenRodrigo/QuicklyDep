@@ -17,7 +17,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(5);
         return view('posts.index', compact('posts'));
     }
 
@@ -55,7 +55,7 @@ class PostController extends Controller
         $description    = $request->get('description');
         $type = $request->get('type');
         $price = $request->get('price');
-        $imageName  = $request->file('image')->store('posts/' . Auth::id(), 'public');
+        $imageName  = $request->file('image')->store('posts/', 'public');
         $country = $request->get('country');
         $city = $request->get('city');
         $district = $request->get('district');
@@ -70,19 +70,28 @@ class PostController extends Controller
         ]);                
         
         // Embebed Document For establishments
-        $establishment = new Establishment();
-        $establishment->precio = $price;
-        $establishment->imagen = $imageName;
-        $post->establishments()->save($establishment);
+        // $establishment = Establishment::where('pais', '=', $country)->firstOrFail();
+        // // $aux = Establishment::find($establishment->)
+        // if($establishment->count()==0){
+        //     $establishment = Establishment::create([
+        //         'pais' => $country,            
+        //     ]);
+        // }        
+
+        // $establishment->pais = $country;
+        // // $establishment->imagen = $imageName;
+        // $post->establishment()->save($establishment);
 
         // Embebed Document For Adress
-        $adress = new Adress();
-        $adress->pais = $country;
-        $adress->ciudad = $city;
-        $adress->distrito = $district;
-        $adress->direccion = $direccion;
-
-        $establishment->adresses()->save($adress);
+        $establishment = new Establishment();        
+        $establishment->pais = $country;
+        $establishment->ciudad = $city;
+        $establishment->distrito = $district;
+        $establishment->direccion = $direccion;
+        $establishment->id_post = $post->id;
+        $establishment->precio = $price;
+        $establishment->imagen = $imageName;
+        $post->establishment()->save($establishment);
 
         return redirect('/');
     }
@@ -96,6 +105,24 @@ class PostController extends Controller
     public function show(Post $Post)
     {
         //
+    }
+
+    public function showPostVentaPais($tipo, $pais=null)
+    {   
+        if(!is_null($pais)){
+
+            $posts = Post::whereHas('establishment', function($q) use ($pais){
+                $q->where('pais', $pais);
+            }
+            )->where('tipo', $tipo)->paginate(5);
+
+            return view('posts.index', compact('posts'));
+        } else {
+            
+            $posts = Post::where('tipo', $tipo)->paginate(5);
+            
+            return view('posts.index', compact('posts'));
+        }        
     }
 
     /**
@@ -130,5 +157,11 @@ class PostController extends Controller
     public function destroy(Post $Post)
     {
         //
+    }
+
+    // Post Filters
+    public function salesFilter(Request $request)
+    {
+        
     }
 }

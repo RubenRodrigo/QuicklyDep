@@ -16,6 +16,8 @@ Route::get('/posts', 'PostController@index');
 Route::get('/posts/create', 'PostController@create');
 Route::post('/posts', 'PostController@store');
 
+Route::get('/post/{tipo}/{pais?}', 'PostController@showPostVentaPais')->name('post.filtro');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
