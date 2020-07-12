@@ -102,9 +102,9 @@ class PostController extends Controller
      * @param  \App\Post  $Post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $Post)
+    public function show($id)
     {
-        //
+        return view('posts.postUnico',['post' => Post::find($id)]);
     }
 
     public function showPostVentaPais($tipo, $pais=null)

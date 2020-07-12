@@ -7,7 +7,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class Comment extends Model
 {
     protected $fillable= [
-        'contenido', 'id_comentario_respuesta'
+        'contenido', #'id_comentario_respuesta'
     ];
 
     public function user()
