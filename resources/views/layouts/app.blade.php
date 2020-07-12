@@ -74,6 +74,11 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+
+                                    <a class="dropdown-item" href="{{ route('users.edit', Auth::user()->id) }}">
+                                        {{ __('Editar') }}
+                                    </a>
+
                                 </div>
                             </li>
                         @endguest
