@@ -15,8 +15,8 @@ class Establishment extends Model
         return $this->belongsTo('App\Post');
     }
 
-    // public function adresses()
-    // {
-    //     return $this->embedsMany('App\Adress');
-    // }
+    public function features()
+    {
+        return $this->embedsMany('App\Feature');
+    }
 }

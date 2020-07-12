@@ -22,7 +22,12 @@ class UserCollectionSeeder extends Seeder
                 ->each( function($post){
                     $post->establishment()->createMany(
                         factory(App\Establishment::class, 1)->make()->toArray()
-                    );
+                    )
+                    ->each( function($establishment){
+                        $establishment->features()->createMany(
+                            factory(App\Feature::class, 1)->make()->toArray()
+                        );
+                    });
                 });  
             });
 
