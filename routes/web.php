@@ -15,6 +15,8 @@ Route::redirect('/', '/posts');
 Route::get('/posts', 'PostController@index');
 Route::get('/posts/create', 'PostController@create');
 Route::post('/posts', 'PostController@store');
+Route::get('/posts/{id}', 'PostController@show')->name('post');
+Route::post('/comments', 'CommentController@store');
 
 Route::get('/post/{tipo}/{pais?}', 'PostController@showPostVentaPais')->name('post.filtro');
 
