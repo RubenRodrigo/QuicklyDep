@@ -92,9 +92,9 @@
                         @php
                             $paises = App\Establishment::groupBy('pais')->get(['pais'])
                         @endphp 
-                        <a class="dropdown-item" href="{{route('post.filtro', ['tipo'=> 'Venta'])}}">Todo Ventas</a>                     
+                        <a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Venta'])}}">Todo Ventas</a>                     
                         @foreach ($paises as $pais)
-                            <a class="dropdown-item" href="{{route('post.filtro', ['tipo'=> 'Venta', 'pais'=>$pais->pais])}}">{{$pais->pais}}</a>
+                            <a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Venta', 'pais'=>$pais->pais])}}">{{$pais->pais}}</a>
                         @endforeach
                         </div>
                     </div>
@@ -107,9 +107,9 @@
                             @php
                                 $paises = App\Establishment::groupBy('pais')->get(['pais'])
                             @endphp     
-                            <a class="dropdown-item" href="{{route('post.filtro', ['tipo'=> 'Alquiler'])}}">Todo Alquiler</a>                    
+                            <a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Alquiler'])}}">Todo Alquiler</a>                    
                             @foreach ($paises as $pais)
-                                <a class="dropdown-item" href="{{route('post.filtro', ['tipo'=> 'Alquiler', 'pais'=>$pais->pais])}}">{{$pais->pais}}</a>
+                                <a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Alquiler', 'pais'=>$pais->pais])}}">{{$pais->pais}}</a>
                             @endforeach
                         </div>
                     </div>

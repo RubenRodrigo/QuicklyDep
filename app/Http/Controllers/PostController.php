@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-use App\Adress;
 use App\Establishment;
+use App\Feature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,58 +40,69 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required:max:120',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            // Campos del modelo Post
+            'name' => 'required:max:120',            
             'description'=> 'required:max:2200',
             'type'=>'not_in:x',
+            // Campos del modelo Establishement
             'price'=> 'required|numeric|gt:0',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'country'=> 'not_in:x',
             'city'=> 'not_in:x',
             'district'=> 'required',
-            'adress'=> 'required'
+            'adress'=> 'required',
+            // Campos del modelo Feature
+            'bathroom' => 'not_in:x',
+            'bedroom' => 'not_in:x',
+            'garage' => 'not_in:x',
+            'pool' => 'not_in:x',            
         ]);
-        
-        $name      = $request->get('name');        
+
+        // Campos del modelo Post
+        $name           = $request->get('name');        
         $description    = $request->get('description');
-        $type = $request->get('type');
-        $price = $request->get('price');
-        $imageName  = $request->file('image')->store('posts/', 'public');
-        $country = $request->get('country');
-        $city = $request->get('city');
-        $district = $request->get('district');
-        $direccion = $request->get('adress');
+        $type           = $request->get('type');
+
+        // Campos del modelo Establishement
+        $price          = $request->get('price');
+        $imageName      = $request->file('image')->store('posts/', 'public');
+        $country        = $request->get('country');
+        $city           = $request->get('city');
+        $district       = $request->get('district');
+        $direccion      = $request->get('adress');
+
+        // Campos del modelo Feature
+        $bathroom       = $request->get('bathroom');
+        $bedroom        = $request->get('bedroom');
+        $garage         = $request->get('garage');
+        $pool           = $request->get('pool');
+        $other          = $request->get('other');
         
         echo $type . $country . $city;
         
         $post = $request->user()->posts()->create([
-            'nombre' => $name,
-            'descripcion' => $description,
-            'tipo' => $type,
+            'nombre'        => $name,
+            'descripcion'   => $description,
+            'tipo'          => $type,
         ]);                
         
-        // Embebed Document For establishments
-        // $establishment = Establishment::where('pais', '=', $country)->firstOrFail();
-        // // $aux = Establishment::find($establishment->)
-        // if($establishment->count()==0){
-        //     $establishment = Establishment::create([
-        //         'pais' => $country,            
-        //     ]);
-        // }        
-
-        // $establishment->pais = $country;
-        // // $establishment->imagen = $imageName;
-        // $post->establishment()->save($establishment);
-
-        // Embebed Document For Adress
         $establishment = new Establishment();        
-        $establishment->pais = $country;
-        $establishment->ciudad = $city;
-        $establishment->distrito = $district;
-        $establishment->direccion = $direccion;
-        $establishment->id_post = $post->id;
-        $establishment->precio = $price;
-        $establishment->imagen = $imageName;
+        $establishment->pais        = $country;
+        $establishment->ciudad      = $city;
+        $establishment->distrito    = $district;
+        $establishment->direccion   = $direccion;
+        $establishment->id_post     = $post->id;
+        $establishment->precio      = $price;
+        $establishment->imagen      = $imageName;
         $post->establishment()->save($establishment);
+        
+        $feature = new Feature();
+        $feature->baños         = $bathroom;
+        $feature->dormitorios   = $bedroom;
+        $feature->garage        = $garage;
+        $feature->piscina       = $pool;
+        $feature->otros         = $other;
+        $establishment->features()->save($feature);
 
         return redirect('/');
     }
@@ -107,6 +118,7 @@ class PostController extends Controller
         return view('posts.postUnico',['post' => Post::find($id)]);
     }
 
+    // Filtro para ventas y alquiler por pais
     public function showPostVentaPais($tipo, $pais=null)
     {   
         if(!is_null($pais)){
@@ -131,9 +143,19 @@ class PostController extends Controller
      * @param  \App\Post  $Post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $Post)
+    public function edit($post_id)
     {
-        //
+        if (Auth::user()) {
+            $post = Post::find($post_id);               
+            return view('posts.editPost')->withPost($post);
+            if($post){
+                return view('posts.editPost')->withPost($post);
+            } else {
+                return redirect()->back();
+            }
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -143,9 +165,9 @@ class PostController extends Controller
      * @param  \App\Post  $Post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $Post)
+    public function update(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -154,14 +176,22 @@ class PostController extends Controller
      * @param  \App\Post  $Post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $Post)
+    public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        
+        $establishment = Establishment::where('id_post', $id)->firstOrFail();
+        $establishment->delete();
+
+        return redirect('/');
     }
 
-    // Post Filters
-    public function salesFilter(Request $request)
+    // Publicaciones por usuario
+    public function userPosts()
     {
-        
+        $user_id = Auth::id();        
+        $posts = Post::where('user_id', '=', $user_id)->get();
+        return view('posts.misPosts', compact('posts'));
     }
 }

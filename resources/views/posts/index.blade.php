@@ -4,7 +4,7 @@
 <div class="container">
     @auth
         <nav>
-            <a class="btn btn-light btn-lg" href="">Mis Publicaciones</a>
+            <a class="btn btn-light btn-lg" href="{{action('PostController@userPosts')}}">Mis Publicaciones</a>
         </nav>
     @endauth
     @foreach($posts as $post)
@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{{ action('PostController@show', $post->id) }}">{{ $post->nombre }}</a>
+                        <a href="{{route('post.unico', ['id'=> $post->id])}}">{{ $post->nombre }}</a>
                     </h5>
                 </div>                
                 <img src="{{ Storage::url($post->establishment->imagen) }}" class="card-img-top" alt="...">

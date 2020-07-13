@@ -11,6 +11,9 @@
             <h6 class="card-subtitle mb-2 text-muted">{{ $post->created_at->toFormattedDateString() }}</h6>
             <p class="card-text">{{ $post->descripcion }}</p>
             <a href="{{ action('PostController@index') }}" class="card-link">Todas las publicaciones </a>
+            @if ($post->user_id === Auth::id())
+              <a href="{{route('post.edit', ['post_id'=> $post->id])}}" class="card-link">Editar</a>
+            @endif
           </div>
         </div>
         @auth
@@ -37,7 +40,7 @@
           </form>
         @endauth
         @guest
-          <p>si deseas comentar <a href="{{ action('Auth\LoginController@showLoginform') }}">inicia session</a> o <a href="{{ action('Auth\RegisterController@showRegistrationForm') }}">registrate</a></p>
+          <p>si deseas comentar <a href="{{ action('Auth\LoginController@showLoginForm') }}">inicia session</a> o <a href="{{ action('Auth\RegisterController@showRegistrationForm') }}">registrate</a></p>
         @endguest
         @forelse ($post->comments as $comment)
           <div class="card">

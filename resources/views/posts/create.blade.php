@@ -125,6 +125,79 @@
                     </div>
                 </div>
 
+                <div class="form-group"> 
+                    <div class="col-sm-12">                   
+                        <label for="type">Características</label>
+
+                        <select name="bathroom" id="bathroom" class="form-control{{ $errors->has('bathroom') ? ' is-invalid':'' }}">
+                            <option selected value="x">Número de Baños</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>
+                        @if ($errors->has('bathroom'))
+                            <span class="invalid-feedback">
+                                <strong>{{$errors->first('bathroom')}}</strong>
+                            </span>
+                        @endif
+
+                        <select name="bedroom" id="bedroom" class="form-control{{ $errors->has('bedroom') ? ' is-invalid':'' }}">
+                            <option selected value="x">Número de dormitorios</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                        </select>
+                        @if ($errors->has('bedroom'))
+                            <span class="invalid-feedback">
+                                <strong>{{$errors->first('bedroom')}}</strong>
+                            </span>
+                        @endif
+
+                        <select name="garage" id="garage" class="form-control{{ $errors->has('garage') ? ' is-invalid':'' }}">
+                            <option selected value="x">Garage</option>
+                            <option >Si</option>
+                            <option >No</option>
+                        </select>
+                        @if ($errors->has('garage'))
+                            <span class="invalid-feedback">
+                                <strong>{{$errors->first('garage')}}</strong>
+                            </span>
+                        @endif
+
+                        <select name="pool" id="pool" class="form-control{{ $errors->has('pool') ? ' is-invalid':'' }}">
+                            <option selected value="x">Piscina</option>
+                            <option >Si</option>
+                            <option >No</option>
+                        </select>
+                        @if ($errors->has('pool'))
+                            <span class="invalid-feedback">
+                                <strong>{{$errors->first('pool')}}</strong>
+                            </span>
+                        @endif
+
+                        <label for="type">Otras Características</label>
+                        <textarea class="form-control {{$errors->has('other') ?' is-invalid' : ''}}" id="other" name="other" rows="3">{{old('other')}}</textarea>
+
+                        @if ($errors->has('other'))
+                            <span class="invalid-feedback">
+                                <strong>{{$errors->first('other')}}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-primary">
