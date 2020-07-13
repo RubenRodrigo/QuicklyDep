@@ -26,3 +26,8 @@ Route::get('/post/{id}', 'PostController@show')->name('post.unico');
 
 Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
+
+//Rutas de usuarios
+Route::patch('/users/{id}', 'UserController@update')->name('users.update');
+Route::get('/users/{id}/edit', 'UserController@edit')->name('users.edit');
