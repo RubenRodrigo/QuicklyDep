@@ -3,12 +3,13 @@
 Route::redirect('/', '/posts');
 Route::get('/posts', 'PostController@index');
 Route::get('/posts/create', 'PostController@create');
+# Crear Post
 Route::post('/posts', 'PostController@store');
 
 # Posts Usuario
 Route::get('/posts/myPosts', 'PostController@userPosts');
 
-# Crear Post
+# Crear Comentario
 Route::post('/comments', 'CommentController@store');
 # Eliminar Post
 Route::delete('/posts/{id}', 'PostController@destroy');
@@ -18,7 +19,7 @@ Route::get('/posts/{tipo}/{pais?}', 'PostController@showPostVentaPais')->name('p
 
 # Editar Post
 Route::get('/edit/post/{post_id}', 'PostController@edit')->name('post.edit');
-Route::post('/edit/post/', 'PostController@update')->name('post.update');
+Route::post('/edit/post/', 'PostController@update')->name('update');
 
 # Post Unico
 Route::get('/post/{id}', 'PostController@show')->name('post.unico');

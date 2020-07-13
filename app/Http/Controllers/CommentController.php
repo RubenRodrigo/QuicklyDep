@@ -52,7 +52,7 @@ class CommentController extends Controller
         $post = Post::find($request->get('post_id'));
         $post->comments()->save($comment);
 
-        return redirect()->route('post', ['id' => $request->get('post_id')]);
+        return redirect()->route('post.unico', ['id' => $request->get('post_id')]);
     }
 
     /**

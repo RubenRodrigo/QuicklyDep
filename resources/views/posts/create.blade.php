@@ -79,6 +79,7 @@
                             <option selected value="x">Escoge el pais</option>
                             <option>Perú</option>
                             <option>Chile</option>
+                            <option>Bolivia</option>
                         </select>
                         @if ($errors->has('country'))
                             <span class="invalid-feedback">
@@ -99,6 +100,11 @@
                         @endif
 
                         <input id="district" class="form-control{{ $errors->has('district') ? ' is-invalid':'' }}" type="text" name="district" value="{{ old('district') }}" autofocus placeholder="Distrito">
+                        @if ($errors->has('district'))
+                            <span class="invalid-feedback">
+                                <strong>{{$errors->first('district')}}</strong>
+                            </span>
+                        @endif
 
                         <input id="adress" class="form-control{{ $errors->has('adress') ? ' is-invalid':'' }}" type="text" name="adress" value="{{ old('adress') }}" autofocus placeholder="Direccion">
                         @if ($errors->has('adress'))

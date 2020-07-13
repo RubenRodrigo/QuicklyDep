@@ -36,7 +36,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav flex-grow-1 bd-highlight">                        
                         <form class="form-inline">
-                            <input class="form-control col-7" type="search" placeholder="Que desea buscar?">
+                            <input class="form-control" type="search" placeholder="Que desea buscar?">
                             <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Buscar</button>
                         </form>
                     </ul>

@@ -78,7 +78,7 @@ class PostController extends Controller
         $pool           = $request->get('pool');
         $other          = $request->get('other');
         
-        echo $type . $country . $city;
+        // echo $type . $country . $city;
         
         $post = $request->user()->posts()->create([
             'nombre'        => $name,
@@ -167,7 +167,55 @@ class PostController extends Controller
      */
     public function update(Request $request)
     {
+        $request->validate([
+            // Campos del modelo Post
+            'name' => 'required:max:120',            
+            'description'=> 'required:max:2200',
+            // 'type'=>'not_in:x',
+            // Campos del modelo Establishement
+            'price'=> 'required|numeric|gt:0',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            // 'country'=> 'not_in:x',
+            // 'city'=> 'not_in:x',
+            'district'=> 'required',
+            'adress'=> 'required',
+            // Campos del modelo Feature
+            // 'bathroom' => 'not_in:x',
+            // 'bedroom' => 'not_in:x',
+            // 'garage' => 'not_in:x',
+            // 'pool' => 'not_in:x',            
+        ]);
         
+        // Campos del modelo Post
+        $name           = $request->get('name');        
+        $description    = $request->get('description');
+        $type           = $request->get('type');
+
+        // Campos del modelo Establishement
+        $price          = $request->get('price');
+        $imageName      = $request->file('image')->store('posts/', 'public');
+        $country        = $request->get('country');
+        $city           = $request->get('city');
+        $district       = $request->get('district');
+        $direccion      = $request->get('adress');
+        $post_id        = $request->get('post_id');
+        
+        $post = Post::find($post_id);
+        $post->nombre = $name;
+        $post->descripcion = $description;
+        $post->tipo = $type;
+        $post->save();
+
+        $establishment = Establishment::find($post->establishment->id);
+        $establishment->pais        = $country;
+        $establishment->ciudad      = $city;
+        $establishment->distrito    = $district;
+        $establishment->direccion   = $direccion;        
+        $establishment->precio      = $price;
+        $establishment->imagen      = $imageName;
+        $establishment->save();
+
+        return view('posts.postUnico',['post' => Post::find($post_id)]);
     }
 
     /**
