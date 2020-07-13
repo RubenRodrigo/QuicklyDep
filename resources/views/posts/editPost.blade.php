@@ -63,9 +63,11 @@
                     <div class="card-body"> 
                         <input type="number" class="form-control{{ $errors->has('price') ? ' is-invalid':'' }}" id="price" min="0" name="price" value="{{ $post->establishment->precio}}"/>
                     </div>
-                    {{--<div class="card-body"> 
+                    <div class="card-body"> 
                         <select name="bathroom" id="bathroom" class="form-control{{ $errors->has('bathroom') ? ' is-invalid':'' }}">
-                            <option selected value="{{ $post->establishment->features->}}">Tu publicacion es de {{ $post->establishment->features}} baños</option>
+                            @foreach($post->establishment->features as $feature)
+                                <option selected value="{{$feature->baños}}">Tu publicacion es de {{$feature->baños}} baños</option>
+                            @endforeach
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -78,9 +80,12 @@
                             <option>10</option>
                         </select>
                     </div>
+                    
                     <div class="card-body"> 
                         <select name="bedroom" id="bedroom" class="form-control{{ $errors->has('bedroom') ? ' is-invalid':'' }}">
-                        <option selected value="{{ $post->establishment->features}}">Tu publicacion es de{{ $post->establishment->features}} dormitorios</option>
+                        @foreach($post->establishment->features as $feature)
+                            <option selected value="{{$feature->dormitorios}}">Tu publicacion es de {{$feature->dormitorios}} dormitorios</option>
+                        @endforeach
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -93,22 +98,28 @@
                     </div>
                     <div class="card-body"> 
                         <select name="garage" id="garage" class="form-control{{ $errors->has('garage') ? ' is-invalid':'' }}">
-                            <option selected value="x">Garage</option>
+                        @foreach($post->establishment->features as $feature)
+                            <option selected value="{{$feature->garage}}">Tu publicacion {{$feature->garage}} tiene garage</option>
+                        @endforeach                            
                             <option >Si</option>
                             <option >No</option>
                         </select>
                     </div>
                     <div class="card-body"> 
                         <select name="pool" id="pool" class="form-control{{ $errors->has('pool') ? ' is-invalid':'' }}">
-                            <option selected value="x">Piscina</option>
+                        @foreach($post->establishment->features as $feature)
+                            <option selected value="{{$feature->pool}}">Tu publicacion {{$feature->garage}} tiene piscina</option>
+                        @endforeach  
                             <option >Si</option>
                             <option >No</option>
                         </select>
                     </div>
                     
                     <div>
-                        <textarea class="form-control {{$errors->has('other') ?' is-invalid' : ''}}" id="other" name="other" rows="3">{{old('other')}}</textarea>
-                    </div>--}}                    
+                        @foreach($post->establishment->features as $feature)
+                            <textarea class="form-control {{$errors->has('other') ?' is-invalid' : ''}}" id="other" name="other" rows="3">{{$feature->otros}}</textarea>
+                        @endforeach 
+                    </div>                  
 
                     <input type="hidden" name="post_id" value="{{$post->id}}">
                     <div class="form-group row mb-0">

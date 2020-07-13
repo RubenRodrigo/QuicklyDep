@@ -200,6 +200,13 @@ class PostController extends Controller
         $direccion      = $request->get('adress');
         $post_id        = $request->get('post_id');
         
+        // Campos del modelo Feature
+        $bathroom       = $request->get('bathroom');
+        $bedroom        = $request->get('bedroom');
+        $garage         = $request->get('garage');
+        $pool           = $request->get('pool');
+        $other          = $request->get('other');
+
         $post = Post::find($post_id);
         $post->nombre = $name;
         $post->descripcion = $description;
@@ -214,6 +221,16 @@ class PostController extends Controller
         $establishment->precio      = $price;
         $establishment->imagen      = $imageName;
         $establishment->save();
+
+        $features = $establishment->features;
+        foreach ($features as $feature) {
+            $feature->baños         = $bathroom;
+            $feature->dormitorios   = $bedroom;
+            $feature->garage        = $garage;
+            $feature->piscina       = $pool;
+            $feature->otros         = $other;
+            $feature->save();
+        }        
 
         return view('posts.postUnico',['post' => Post::find($post_id)]);
     }
