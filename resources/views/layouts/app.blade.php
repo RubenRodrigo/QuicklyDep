@@ -95,11 +95,11 @@
                         
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                         @php
-                            $paises = App\Establishment::groupBy('pais')->get(['pais'])
+                            $distritos = App\Establishment::groupBy('distrito')->get(['distrito'])
                         @endphp 
                         <a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Venta'])}}">Todo Ventas</a>                     
-                        @foreach ($paises as $pais)
-                            <a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Venta', 'pais'=>$pais->pais])}}">{{$pais->pais}}</a>
+                        @foreach ($distritos as $distrito)
+                            <a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Venta', 'distrito'=>$distrito->distrito])}}">{{$distrito->distrito}}</a>
                         @endforeach
                         </div>
                     </div>
@@ -110,11 +110,11 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                             @php
-                                $paises = App\Establishment::groupBy('pais')->get(['pais'])
+                                $distritos = App\Establishment::groupBy('distrito')->get(['distrito'])
                             @endphp     
                             <a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Alquiler'])}}">Todo Alquiler</a>                    
-                            @foreach ($paises as $pais)
-                                <a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Alquiler', 'pais'=>$pais->pais])}}">{{$pais->pais}}</a>
+                            @foreach ($distritos as $distrito)
+                                <a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Alquiler', 'distrito'=>$distrito->distrito])}}">{{$distrito->distrito}}</a>
                             @endforeach
                         </div>
                     </div>

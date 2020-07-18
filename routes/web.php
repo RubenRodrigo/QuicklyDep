@@ -15,7 +15,7 @@ Route::post('/comments', 'CommentController@store');
 Route::delete('/posts/{id}', 'PostController@destroy');
 
 # Filtro de publicaciones
-Route::get('/posts/{tipo}/{pais?}', 'PostController@showPostVentaPais')->name('posts.filtro');
+Route::get('/posts/{tipo}/{distrito?}', 'PostController@showPostVentaAlquiler')->name('posts.filtro');
 
 # Editar Post
 Route::get('/edit/post/{post_id}', 'PostController@edit')->name('post.edit');

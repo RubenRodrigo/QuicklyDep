@@ -33,7 +33,7 @@
                         </select>
                     </div>
 
-                    <div class="card-body">                        
+                    {{--<div class="card-body">                        
                         <label for="type">Pais</label>
                         <select name="country" id="country" class="form-control{{ $errors->has('type') ? ' is-invalid':'' }}">                            
                             <option selected value="{{$post->establishment->pais}}">Tu publicacion es de {{$post->establishment->pais}}</option>
@@ -41,7 +41,7 @@
                             <option>Chile</option>
                             <option>Bolivia</option>
                         </select>
-                    </div>
+                    </div>--}}
 
                     <div class="card-body">
                         <select name="city" id="city" class="form-control{{ $errors->has('city') ? ' is-invalid':'' }}">

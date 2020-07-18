@@ -12,7 +12,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show', 'showPostVentaPais']);
+        $this->middleware('auth')->except(['index', 'show', 'showPostVentaAlquiler']);
     }
 
     public function index()
@@ -46,8 +46,7 @@ class PostController extends Controller
             'type'=>'not_in:x',
             // Campos del modelo Establishement
             'price'=> 'required|numeric|gt:0',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'country'=> 'not_in:x',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',            
             'city'=> 'not_in:x',
             'district'=> 'required',
             'adress'=> 'required',
@@ -66,7 +65,6 @@ class PostController extends Controller
         // Campos del modelo Establishement
         $price          = $request->get('price');
         $imageName      = $request->file('image')->store('posts/', 'public');
-        $country        = $request->get('country');
         $city           = $request->get('city');
         $district       = $request->get('district');
         $direccion      = $request->get('adress');
@@ -86,8 +84,8 @@ class PostController extends Controller
             'tipo'          => $type,
         ]);                
         
-        $establishment = new Establishment();        
-        $establishment->pais        = $country;
+        $establishment = new Establishment();   
+        $establishment->pais        = "Perú";             
         $establishment->ciudad      = $city;
         $establishment->distrito    = $district;
         $establishment->direccion   = $direccion;
@@ -118,13 +116,13 @@ class PostController extends Controller
         return view('posts.postUnico',['post' => Post::find($id)]);
     }
 
-    // Filtro para ventas y alquiler por pais
-    public function showPostVentaPais($tipo, $pais=null)
+    // Filtro para ventas y alquiler
+    public function showPostVentaAlquiler($tipo, $distrito=null)
     {   
-        if(!is_null($pais)){
+        if(!is_null($distrito)){
 
-            $posts = Post::whereHas('establishment', function($q) use ($pais){
-                $q->where('pais', $pais);
+            $posts = Post::whereHas('establishment', function($q) use ($distrito){
+                $q->where('distrito', $distrito);
             }
             )->where('tipo', $tipo)->paginate(5);
 
@@ -193,8 +191,7 @@ class PostController extends Controller
 
         // Campos del modelo Establishement
         $price          = $request->get('price');
-        $imageName      = $request->file('image')->store('posts/', 'public');
-        $country        = $request->get('country');
+        $imageName      = $request->file('image')->store('posts/', 'public');        
         $city           = $request->get('city');
         $district       = $request->get('district');
         $direccion      = $request->get('adress');
@@ -213,8 +210,8 @@ class PostController extends Controller
         $post->tipo = $type;
         $post->save();
 
-        $establishment = Establishment::find($post->establishment->id);
-        $establishment->pais        = $country;
+        $establishment = Establishment::find($post->establishment->id);        
+        $establishment->pais        = "Perú";
         $establishment->ciudad      = $city;
         $establishment->distrito    = $district;
         $establishment->direccion   = $direccion;        
