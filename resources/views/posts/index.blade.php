@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+<link rel="stylesheet" href="{{ asset('css/estilos.css') }}" />
     @auth
         <nav>
             <a class="btn btn-light btn-lg" href="{{action('PostController@userPosts')}}">Mis Publicaciones</a>
