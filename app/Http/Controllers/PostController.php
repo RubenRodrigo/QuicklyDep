@@ -15,10 +15,20 @@ class PostController extends Controller
         $this->middleware('auth')->except(['index', 'show', 'showPostVentaAlquiler']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::paginate(5);
-        return view('posts.index', compact('posts'));
+        //Se obtiene el valor de búsqueda
+        $query = trim($request->get('search'));
+
+        //Revisamos que el valor de búsqueda contenga un valor para controlar los resultados expuestos:
+        if($query==""){
+            $posts = Post::where('nombre', 'LIKE', '% %')->paginate(5);    
+        }else{
+            $posts = Post::where('nombre', 'LIKE', '%' . $query . '%')->paginate(5);
+        }
+
+        //Retornamos la vista con los elementos correspondientes a la búsqueda y el valor de la búsqueda:
+        return view('posts.index', ['posts'=>$posts,'search'=>$query]);
     }
 
     /**
