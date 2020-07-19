@@ -2,6 +2,7 @@
 
 @section('content')
   <div class="container">
+    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}" />
     <div>
       <div class="col-md-8">
         <div class="card">
