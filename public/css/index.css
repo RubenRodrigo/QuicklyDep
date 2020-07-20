@@ -1,0 +1,56 @@
+.container-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1450px;
+    min-width: 765px;
+}
+
+.opciones{
+    grid-column: 1/2;
+}
+
+.contenido{
+    grid-column: 2/5;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.paginate{
+    grid-column: 1/5;
+    
+}
+.paginate nav ul{
+    justify-content: center;
+}
+.post{
+    color: black;
+    text-decoration: none;
+}
+.post:hover{    
+    color: black;
+    text-decoration: none;
+}
+.informacion > *{
+    white-space: nowrap; 
+    width:200px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+/* Estilos para las imagenes de la vista create*/
+.imagen{
+    border: 1px solid black;
+}
+
+.file-imagen{
+    cursor: pointer;
+    width:100%;
+    text-align:center;
+    margin:0;
+    border-top: 1px solid black;
+}
+.file-imagen>input[type="file"] {
+    display: none;
+}

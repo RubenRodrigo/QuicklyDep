@@ -5,7 +5,7 @@
     <div class="row justify-content-md-center">
       <div class="col-md-8">
         <div class="card">
-          <img src="{{ Storage::url($post->establishment->imagen) }}" class="card-img-top" alt="...">
+          <img src="{{ Storage::url($post->establishment->imagen[0]) }}" class="card-img-top" alt="...">
           <div class="card-body">
             <h3 class="card-title">{{ $post->nombre }}</h3>
             <h6 class="card-subtitle mb-2 text-muted">{{ $post->created_at->toFormattedDateString() }}</h6>

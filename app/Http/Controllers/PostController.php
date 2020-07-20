@@ -7,6 +7,9 @@ use App\Establishment;
 use App\Feature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
+
 
 class PostController extends Controller
 {
@@ -64,7 +67,45 @@ class PostController extends Controller
 
         // Campos del modelo Establishement
         $price          = $request->get('price');
+        $image = array();            
         $imageName      = $request->file('image')->store('posts/', 'public');
+        $image[] = $imageName;
+        if ($request->file('image1')) {
+            $imageName1      = $request->file('image1')->store('posts/', 'public');
+            $image[] = $imageName1;
+        }
+        if ($request->file('image2')) {
+            $imageName2      = $request->file('image2')->store('posts/', 'public');
+            $image[] = $imageName2;
+        }
+        if ($request->file('image3')) {
+            $imageName3      = $request->file('image3')->store('posts/', 'public');
+            $image[] = $imageName3;
+        }
+        if ($request->file('image4')) {
+            $imageName4      = $request->file('image4')->store('posts/', 'public');
+            $image[] = $imageName4;
+        }
+        if ($request->file('image5')) {
+            $imageName5      = $request->file('image5')->store('posts/', 'public');
+            $image[] = $imageName5;
+        }
+        if ($request->file('image6')) {
+            $imageName6      = $request->file('image6')->store('posts/', 'public');
+            $image[] = $imageName6;
+        }
+        if ($request->file('image7')) {
+            $imageName7      = $request->file('image7')->store('posts/', 'public');
+            $image[] = $imageName7;
+        }
+        // $image = array();
+        // foreach ($request->file('image') as $imageName){
+        //     $imageFile = $imageName->store('posts/', 'public');;
+        //     // Storage::disk('public')->putFile('posts/', $imageFile);
+        //     $image[] = $imageFile;
+        // }
+        // dd($image);
+
         $city           = $request->get('city');
         $district       = $request->get('district');
         $direccion      = $request->get('adress');
@@ -91,7 +132,7 @@ class PostController extends Controller
         $establishment->direccion   = $direccion;
         $establishment->id_post     = $post->id;
         $establishment->precio      = $price;
-        $establishment->imagen      = $imageName;
+        $establishment->imagen      = $image;
         $post->establishment()->save($establishment);
         
         $feature = new Feature();
@@ -191,7 +232,7 @@ class PostController extends Controller
 
         // Campos del modelo Establishement
         $price          = $request->get('price');
-        $imageName      = $request->file('image')->store('posts/', 'public');        
+        $imageName      = $request->file('image')->store('posts/', 'public');
         $city           = $request->get('city');
         $district       = $request->get('district');
         $direccion      = $request->get('adress');

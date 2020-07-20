@@ -16,7 +16,7 @@
                     <div class="card-body">                        
                         <input class="form-control" type="text" name="name" id="name" value="{{$post->nombre}}"> 
                     </div>                
-                    <img src="{{ Storage::url($post->establishment->imagen) }}" class="card-img-top" alt="...">
+                    <img src="{{ Storage::url($post->establishment->imagen[0]) }}" class="card-img-top" alt="...">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input{{ $errors->has('image') ? ' is-invalid':'' }}" id="image" name="image">
                         <label class="custom-file-label" for="customFile">{{__('Escoge una imagen')}}</label>
