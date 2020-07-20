@@ -2,14 +2,28 @@
 
 @section('content')
   <div class="container">
-    <div class="row justify-content-md-center">
+    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}" />
+    <div>
       <div class="col-md-8">
         <div class="card">
           <img src="{{ Storage::url($post->establishment->imagen[0]) }}" class="card-img-top" alt="...">
           <div class="card-body">
-            <h3 class="card-title">{{ $post->nombre }}</h3>
+            <h2 class="card-title">{{ $post->nombre }}</h2>
             <h6 class="card-subtitle mb-2 text-muted">{{ $post->created_at->toFormattedDateString() }}</h6>
             <p class="card-text">{{ $post->descripcion }}</p>
+            <div>
+            <table>
+              <div><h5 class="card-text">{{ $post->establishment->pais }}</h5></div>
+              <br>
+              <div><h5 class="card-text">{{ $post->establishment->ciudad }}</h5></div>
+              <br>
+              <div><h5 class="card-text">{{ $post->establishment->distrito }}</h5></div>
+              <br>
+              <div><h5 class="card-text">{{ $post->establishment->direccion }}</h5></div>
+              <br>
+              <div><h5 class="card-text">S/. {{ $post->establishment->precio }}</h5></div>
+            </table>
+            </div>
             <a href="{{ action('PostController@index') }}" class="card-link">Todas las publicaciones </a>
             @if ($post->user_id === Auth::id())
               <a href="{{route('post.edit', ['post_id'=> $post->id])}}" class="card-link">Editar</a>
