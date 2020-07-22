@@ -16,6 +16,7 @@ Route::delete('/posts/{id}', 'PostController@destroy')->name('post.destroy');
 
 # Filtro de publicaciones
 Route::get('/posts/{tipo}/{distrito?}', 'PostController@showPostVentaAlquiler')->name('posts.filtro');
+Route::get('/precio', 'PostController@showPostFiltroPrecio')->name('posts.precio');
 
 # Editar Post
 Route::get('/edit/post/{post_id}', 'PostController@edit')->name('post.edit');
