@@ -1,73 +1,178 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container">
-    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}" />
-    <div>
-      <div class="col-md-8">
-        <div class="card">
-          <img src="{{ Storage::url($post->establishment->imagen[0]) }}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h2 class="card-title">{{ $post->nombre }}</h2>
-            <h6 class="card-subtitle mb-2 text-muted">{{ $post->created_at->toFormattedDateString() }}</h6>
-            <p class="card-text">{{ $post->descripcion }}</p>
-            <div>
-            <table>
-              <div><h5 class="card-text">{{ $post->establishment->pais }}</h5></div>
-              <br>
-              <div><h5 class="card-text">{{ $post->establishment->ciudad }}</h5></div>
-              <br>
-              <div><h5 class="card-text">{{ $post->establishment->distrito }}</h5></div>
-              <br>
-              <div><h5 class="card-text">{{ $post->establishment->direccion }}</h5></div>
-              <br>
-              <div><h5 class="card-text">S/. {{ $post->establishment->precio }}</h5></div>
-            </table>
-            </div>
-            <a href="{{ action('PostController@index') }}" class="card-link">Todas las publicaciones </a>
-            @if ($post->user_id === Auth::id())
-              <a href="{{route('post.edit', ['post_id'=> $post->id])}}" class="card-link">Editar</a>
-            @endif
+  <div class="container postUnico">
+    {{--<link rel="stylesheet" href="{{ asset('css/estilos.css') }}" />--}}
+      <div class="imagenes">
+        @php
+          $aux = 1
+        @endphp
+        @foreach($data['post']->establishment->imagen as $imagen)                
+          <div class="imagen-post-unico"  id="imagen{{$aux}}">
+            <a target="_blank" href="{{ Storage::url($imagen) }}">
+            <img class="img-fluid" src="{{ Storage::url($imagen) }}" class="card-img-top" alt="...">
+            </a>
           </div>
+        @php
+          $aux = $aux +1 
+        @endphp
+        @endforeach
+      </div>        
+      <div class="informacion-post-unico">
+        <div class="postHeader">
+          <div class="row">
+            <div class="col-md-10">
+              <h3>{{ $data['post']->nombre }}</h3>
+              @php
+                $features = $data['post']->establishment->features[0]
+              @endphp
+              <h5>{{$features->dormitorios}} dormitorios  ·  {{$features->baños}} baños  ·  Piscina: {{$features->piscina}}  ·  Garage: {{$features->garage}}  ·  Tipo: {{$data['post']->tipo}}</h5>
+            </div>
+            <div class="col-md-2">
+              <i></i>            
+            </div> 
+          </div>         
         </div>
-        @auth
-          <form action="{{ action('CommentController@store',['post_id' => $post->id])}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <label class="col-sm-2 col-form-label" for="content">{{ __('Comment') }}</label>
-                <div class="col-sm-12">
-                <textarea class="form-control @error ('contenido') is-invalid @enderror" id="contenido" name="contenido" rows="3">{{ old('Descripcion') }}</textarea>
-                @error('contenido')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
+        <div class="postBody">
+          <div class="features">
+            <div class="row p-0 m-0">
+              <div class="col-md-2 offset-md-10 p-0">
+                <h6 class="text-muted">{{ $data['post']->created_at->toFormattedDateString() }}</h6>          
+              </div>
+            </div>          
+            <div class="row p-0 m-0 mb-3">
+              <div class="col-md-1 p-0 pr-3">
+                <img src="{{ Storage::url('iconos//ubicacion.jpg') }}" class="icono"></img>
+              </div>
+
+              <div class="col-md-11 p-0">
+                <h5><b>Ubicacion</b></h5>
+                <h6>{{ $data['post']->establishment->pais }} - {{ $data['post']->establishment->ciudad }} - {{ $data['post']->establishment->distrito }} - {{ $data['post']->establishment->direccion }}</h6>
               </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <button type="submit" class="btn btn-primary">
-                        {{ __('Create') }}
-                    </button>
-                </div>
+
+            <div class="row p-0 m-0 mb-3">
+              <div class="col-md-1 p-0 pr-3">
+                <img src="{{ Storage::url('iconos//precio.png') }}" class="icono"></img>
+              </div>
+
+              <div class="col-md-11 p-0">
+                <h5><b>Precio</b></h5>
+                <h6> S/. {{ $data['post']->establishment->precio }}</h6>
+              </div>
             </div>
-          </form>
-        @endauth
-        @guest
-          <p>si deseas comentar <a href="{{ action('Auth\LoginController@showLoginForm') }}">inicia session</a> o <a href="{{ action('Auth\RegisterController@showRegistrationForm') }}">registrate</a></p>
-        @endguest
-        @forelse ($post->comments as $comment)
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-tittle">{{ $comment->user->name }}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">{{ $comment->created_at->toFormattedDateString() }}</h6>
-              <p class="card-text">{{ $comment->contenido }}</p>
+
+            <div class="row p-0 m-0 mb-3">
+              <div class="col-md-1 p-0 pr-3">
+                <img src="{{ Storage::url('iconos//pool.png') }}" class="icono"></img>
+              </div>
+
+              <div class="col-md-11 p-0">
+                <h5><b>Piscina</b></h5>
+                <h6>Este establecimiento {{ $features->piscina }} cuenta con piscina</h6>
+              </div>
+            </div>
+
+            <div class="row p-0 m-0 mb-3">
+              <div class="col-md-1 p-0 pr-3">
+                <img src="{{ Storage::url('iconos//otros.png') }}" class="icono"></img>
+              </div>
+
+              <div class="col-md-11 p-0">
+                <h5><b>Otros</b></h5>
+                <h6>{{ $features->otros }}</h6>
+              </div>
             </div>
           </div>
+          <div class="descripcion">
+            <h4><b>Descripcion</b></h4>
+            <p class="h5 mb-5">{{ $data['post']->descripcion }}</p>
+            <h6><b><a href="">Ponte en contacto con el dueño</a></b></h6>
+          </div>                                                   
+        </div>
+      </div>
+
+      <div class="sugeridos">
+        @forelse($data['postsRecomendados'] as $postRecomendado)
+        <div class="postDisponible mb-5">
+          <a href="{{route('post.unico', ['id'=> $postRecomendado->id])}}">
+            <img src="{{ Storage::url($postRecomendado->establishment->imagen[0]) }}" class="card-img-top" alt="...">
+            <div class="row">
+              <div class="col-md-8">
+              <h5 class="nombre mt-2">
+                {{$postRecomendado->nombre}}
+              </h5>
+              </div>
+              <div class="col-md-4">
+              <h5 class="nombre mt-2">
+                <b>S/. {{$postRecomendado->establishment->precio}}</b>
+              </h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h6 class="mt-2 text-muted">
+                {{$postRecomendado->establishment->ciudad}} - {{$postRecomendado->establishment->distrito}}
+                </h6>
+              </div>
+            </div>
+          </a>
+        </div>        
         @empty
-          <p>No hay comentarios para esta publicacion , se el priemro en hacerlo</p>
+          <div class="noDisponible">
+            <h4>Actualmente no tenemos publicaciones recomendadas para usted</h4>
+          </div>
         @endforelse
       </div>
-    </div>
+
+      <div class="comentarios pt-5">
+        <h4><b>Comentarios</b></h4>
+        @auth
+        <form action="{{ action('CommentController@store',['post_id' => $data['post']->id])}}" method="POST" enctype="multipart/form-data">
+          @csrf
+          <div class="form-group">              
+              <div class="col-sm-12 p-0">
+                <textarea class="form-control @error ('contenido') is-invalid @enderror p-3 comentarioArea" id="contenido" name="contenido" rows="3" placeholder="Escribe tu comentario">{{ old('Descripcion') }}</textarea>
+              @error('contenido')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
+          </div>
+          <div class="form-group">
+              <div class="col-sm-12 p-0">
+                  <button type="submit" class="btn btn-dark p-2 pl-5 pr-5">
+                      {{ __('Enviar') }}
+                  </button>
+              </div>
+          </div>
+        </form>
+        @endauth
+        @guest
+          <h5 class="comprobarUsuario pt-3">Si deseas comentar <a href="{{ action('Auth\LoginController@showLoginForm') }}">inicia sesión</a> o <a href="{{ action('Auth\RegisterController@showRegistrationForm') }}">registrate.</a></h5>
+        @endguest
+        
+        <div class="row m-0">
+        @forelse ($data['post']->comments as $comment)          
+            <div class="col-md-6 p-3 pr-5">
+              <div class="row m-0">
+                <div class="col-md-2 p-1">
+                  <img src="" alt="">
+                </div>
+                <div class="col-md-10 p-3">
+                  <h5 class="m-0"><b>{{ $comment->user->name }}</b></h5>
+                  <p class="text-muted m-0">{{ $comment->created_at->toFormattedDateString() }}</p>
+                </div>
+              </div>              
+              <div class="mt-3">
+                <h5>{{ $comment->contenido }}</h5>
+              </div>
+            </div>          
+        @empty
+        </div>
+          <p>No hay comentarios para esta publicacion , se el primero en hacerlo</p>
+        @endforelse 
+      </div>     
   </div>
 @endsection

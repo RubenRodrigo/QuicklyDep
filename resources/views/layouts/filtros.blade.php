@@ -1,6 +1,6 @@
-<h3>FILTROS</h3>
 <div class="container">
-    <div class="row border border-gray p-3">
+    <h3>FILTROS</h3>
+    <div class="row border border-gray p-3 mt-4">
         <div class="form-row">
             <div class="col-md-12">            
                 <h4>Tipo de publicación</h4>

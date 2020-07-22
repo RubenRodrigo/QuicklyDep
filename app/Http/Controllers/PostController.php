@@ -19,19 +19,20 @@ class PostController extends Controller
     }
 
     public function index(Request $request)
-    {
+    {        
         //Se obtiene el valor de búsqueda
         $query = trim($request->get('search'));
 
         //Revisamos que el valor de búsqueda contenga un valor para controlar los resultados expuestos:
         if($query==""){
+
             $posts = Post::where('nombre', 'LIKE', '% %')->paginate(6);    
         }else{
             $posts = Post::where('nombre', 'LIKE', '%' . $query . '%')->paginate(6);
-        }
+        }        
 
         //Retornamos la vista con los elementos correspondientes a la búsqueda y el valor de la búsqueda:
-        return view('posts.index', ['posts'=>$posts,'search'=>$query]);
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -186,9 +187,21 @@ class PostController extends Controller
      * @param  \App\Post  $Post
      * @return \Illuminate\Http\Response
      */
+
+    // Retorna el post seleccionado y otros 5 post similares
+    // segun su distrito y tipo. Estos estan ordenados por su fecha de creacion
     public function show($id)
     {
-        return view('posts.postUnico',['post' => Post::find($id)]);
+        $data['post'] = Post::find($id);
+        $distrito = $data['post']->establishment->distrito;        
+        $tipo = $data['post']->tipo;
+        
+        $data['postsRecomendados'] = 
+        $posts = Post::whereHas('establishment', function($q) use ($distrito){
+            $q->where('distrito', $distrito);
+        }
+        )->where('tipo', $tipo)->whereNotIn('_id', [$data['post']->id])->orderBy('created_at', 'desc')->take(3)->get();
+        return view('posts.postUnico',['data'=>$data]);
     }
 
     // Filtro para ventas y alquiler
@@ -199,7 +212,9 @@ class PostController extends Controller
             $posts = Post::whereHas('establishment', function($q) use ($distrito){
                 $q->where('distrito', $distrito);
             }
+
             )->where('tipo', $tipo)->paginate(6);
+
 
             return view('posts.index', ['posts'=>$posts, 'tipo'=>$tipo]);
         } else {
