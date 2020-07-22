@@ -34,3 +34,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Rutas de usuarios
 Route::patch('/users/{id}', 'UserController@update')->name('users.update');
 Route::get('/users/{id}/edit', 'UserController@edit')->name('users.edit');
+Route::get('/users/{id}/profile', 'UserController@profile')->name('users.profile');
+Route::post('/profile', 'UserController@update_avatar')->name('update.profile');
