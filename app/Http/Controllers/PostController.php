@@ -15,7 +15,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show', 'showPostVentaAlquiler']);
+        $this->middleware('auth')->except(['index', 'show', 'showPostVentaAlquiler','showPostFiltroPrecio']);
     }
 
     public function index(Request $request)
@@ -25,9 +25,9 @@ class PostController extends Controller
 
         //Revisamos que el valor de búsqueda contenga un valor para controlar los resultados expuestos:
         if($query==""){
-            $posts = Post::where('nombre', 'LIKE', '% %')->paginate(5);    
+            $posts = Post::where('nombre', 'LIKE', '% %')->paginate(6);    
         }else{
-            $posts = Post::where('nombre', 'LIKE', '%' . $query . '%')->paginate(5);
+            $posts = Post::where('nombre', 'LIKE', '%' . $query . '%')->paginate(6);
         }
 
         //Retornamos la vista con los elementos correspondientes a la búsqueda y el valor de la búsqueda:
@@ -39,6 +39,30 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function showPostFiltroPrecio(Request $request)
+    {
+        //Obtenemos las variables de costes para el filtrado:
+        $precio1 = $request->get('precio1');
+        $precio2 = $request->get('precio2');
+
+        //Filtramos la información respecto al atributo de precio de los establecimientos:
+        $posts = Post::whereHas('establishment', function($q) use ($precio1,$precio2){
+            $q->whereBetween('precio', array($precio1, $precio2));
+        }
+        )->paginate(6);
+        if(!is_null($request->get('tipo'))){
+            $tipo = $request->get('tipo');
+            $posts = Post::whereHas('establishment', function($q) use ($precio1,$precio2){
+                $q->whereBetween('precio', array($precio1, $precio2))->where('tipo');
+            }
+            )->where('tipo', $tipo)->paginate(6);
+            return view('posts.index', ['posts'=>$posts,'precio1'=>$precio1,'precio2'=>$precio2,'tipo'=>$tipo]);
+        }
+        return view('posts.index', ['posts'=>$posts,'precio1'=>$precio1,'precio2'=>$precio2]);
+
+    }
+
     public function create()
     {
         return view('posts.create');
@@ -175,14 +199,14 @@ class PostController extends Controller
             $posts = Post::whereHas('establishment', function($q) use ($distrito){
                 $q->where('distrito', $distrito);
             }
-            )->where('tipo', $tipo)->paginate(5);
+            )->where('tipo', $tipo)->paginate(6);
 
-            return view('posts.index', compact('posts'));
+            return view('posts.index', ['posts'=>$posts, 'tipo'=>$tipo]);
         } else {
             
-            $posts = Post::where('tipo', $tipo)->paginate(5);
+            $posts = Post::where('tipo', $tipo)->paginate(6);
             
-            return view('posts.index', compact('posts'));
+            return view('posts.index', ['posts'=>$posts, 'tipo'=>$tipo]);
         }        
     }
 
