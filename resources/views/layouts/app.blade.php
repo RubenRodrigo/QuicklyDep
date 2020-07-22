@@ -15,6 +15,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- Fonts -->
+    <script src="https://kit.fontawesome.com/ae99943a7e.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -32,24 +34,25 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse row" id="navbarSupportedContent">
 
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav flex-grow-1 bd-highlight">                        
-                        <form class="form-inline ml-3">
-                            <!-- Se controla que la variable search exista-->
-                            @isset($search)
-                            <input class="form-control form-control-navbar" name="search" type="search" placeholder="Que desea buscar?" aria-label="Search" value="{{$search}}">
-                            @else
-                            <input class="form-control form-control-navbar" name="search" type="search" placeholder="Que desea buscar?" aria-label="Search">
-                            @endisset
-
-                            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Buscar</button>
+                    <ul class="navbar-nav col-md-8">                        
+                        <form class="col-md-12 row p-0 m-0" method="GET" action="{{ route('posts.search')}}">
+                            <!-- Se controla que la variable search exista-->                            
+                            <div class="col-md-8">                                
+                                <input class="form-control form-control-navbar" name="search" type="search" placeholder="Que desea buscar?" aria-label="Search">
+                                                                
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Buscar</button>
+                            </div>                            
+                                                     
                         </form>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav col-md-4 p-0">
 
                         <!-- Post Link -->
                         <li>
