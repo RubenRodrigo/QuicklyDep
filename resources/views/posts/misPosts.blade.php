@@ -11,7 +11,11 @@
     <div class="row pb-4 pt-4 border-bottom">
         <div class="col-md-4 miPost p-0">
             <a href="{{ action('PostController@show', $post->id) }}">
+            @if($post->establishment->imagen)
                 <img src="{{ Storage::url($post->establishment->imagen[0]) }}" class="card-img-top" alt="...">
+            @else
+                <h3>No tienes imagenes</h3>
+            @endif                 
             </a>
         </div>
         <div class="col-md-8 pl-4">

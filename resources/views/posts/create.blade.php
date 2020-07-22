@@ -24,8 +24,8 @@
                 </div>
                 <div class="form-group col-md-8 mt-3">                                        
                     <h5>
-                        <label for="description">{{__('Nombre')}}</label>
-                    </h5>                    
+                        <label for="name">{{__('Nombre')}}</label>
+                    </h5>
                     <input id="name" class="form-control{{ $errors->has('name') ? ' is-invalid':'' }}" type="text" name="name" value="{{ old('name') }}" autofocus>
                     @if ($errors->has('name'))
                         <span class="invalid-feedback">
@@ -61,7 +61,7 @@
 
                 <div class="form-group col-md-8 mt-3">
                     <h5>
-                        <label for="city">{{__('Direccion')}}</label>
+                        <label for="city">{{__('Ciudad')}}</label>
                     </h5>
                     <select name="city" id="city" class="form-control{{ $errors->has('city') ? ' is-invalid':'' }}">
                         <option selected value="x">Escoge la ciudad</option>
@@ -201,83 +201,54 @@
                     @endif                    
                 </div>
 
-                <div class="form-group col-md-8 mt-3"> 
+                <div class="form-group col-md-12 mt-3"> 
                     <h5>
                         Escoja sus imagenes favoritas
                     </h5>                                                           
                     <div class="container">
                         <div class="row mt-3">
-                            <div class="col-md-3">
+                            <div class="col">
                                 <div class="imagen">
                                     <img id="output" src="" width="100%" height="100px">
                                     <label class="file-imagen">
                                         <input name="image" type="file" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" style="color: transparent">
-                                        Añadir Fotos
+                                        Añadir Foto
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col">
                                 <div class="imagen">
                                     <img id="output1" src="" width="100%" height="100px">
                                     <label class="file-imagen">
                                         <input name="image1" type="file" accept="image/*" onchange="document.getElementById('output1').src = window.URL.createObjectURL(this.files[0])" style="color: transparent">
-                                        Añadir Fotos
+                                        Añadir Foto
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col">
                                 <div class="imagen">
                                     <img id="output2" src="" width="100%" height="100px">
                                     <label class="file-imagen">
                                         <input name="image2" type="file" accept="image/*" onchange="document.getElementById('output2').src = window.URL.createObjectURL(this.files[0])" style="color: transparent">
-                                        Añadir Fotos
+                                        Añadir Foto
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col">
                                 <div class="imagen">
                                     <img id="output3" src="" width="100%" height="100px">
                                     <label class="file-imagen">
                                         <input name="image3" type="file" accept="image/*" onchange="document.getElementById('output3').src = window.URL.createObjectURL(this.files[0])" style="color: transparent">
-                                        Añadir Fotos
+                                        Añadir Foto
                                     </label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-3">
+                            <div class="col">
                                 <div class="imagen">
                                     <img id="output4" src="" width="100%" height="100px">
                                     <label class="file-imagen">
                                         <input name="image4" type="file" accept="image/*" onchange="document.getElementById('output4').src = window.URL.createObjectURL(this.files[0])" style="color: transparent">
-                                        Añadir Fotos
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="imagen">
-                                    <img id="output5" src="" width="100%" height="100px">
-                                    <label class="file-imagen">
-                                        <input name="image5" type="file" accept="image/*" onchange="document.getElementById('output5').src = window.URL.createObjectURL(this.files[0])" style="color: transparent">
-                                        Añadir Fotos
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="imagen">
-                                    <img id="output6" src="" width="100%" height="100px">
-                                    <label class="file-imagen">
-                                        <input name="image6" type="file" accept="image/*" onchange="document.getElementById('output6').src = window.URL.createObjectURL(this.files[0])" style="color: transparent">
-                                        Añadir Fotos
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="imagen">
-                                    <img id="output7" src="" width="100%" height="100px">
-                                    <label class="file-imagen">
-                                        <input name="image7" type="file" accept="image/*" onchange="document.getElementById('output7').src = window.URL.createObjectURL(this.files[0])" style="color: transparent">
-                                        Añadir Fotos
+                                        Añadir Foto
                                     </label>
                                 </div>
                             </div>

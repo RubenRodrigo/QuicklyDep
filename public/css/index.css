@@ -219,3 +219,18 @@ input:focus, textarea:focus, select:focus, button:focus{
     border:none;
     padding: 0;
 }
+
+/* Editar Posts
+.imagenEditar img{
+        width:100%;
+        height: auto;    
+} */
+.imagenEditar label{   
+    border-top:none !important;    
+}
+.imagenEditar img{
+    border-radius: 8px;
+    object-fit: cover;
+    width:100%;
+    height:220px;
+}

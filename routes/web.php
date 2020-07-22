@@ -18,8 +18,8 @@ Route::delete('/posts/{id}', 'PostController@destroy')->name('post.destroy');
 Route::get('/posts/{tipo}/{distrito?}', 'PostController@showPostVentaAlquiler')->name('posts.filtro');
 
 # Editar Post
-Route::get('/edit/post/{post_id}', 'PostController@edit')->name('post.edit');
-Route::post('/edit/post/', 'PostController@update')->name('update');
+Route::get('/edit/{post_id}', 'PostController@edit')->name('post.edit');
+Route::post('/edit', 'PostController@update')->name('update');
 
 # Post Unico
 Route::get('/post/{id}', 'PostController@show')->name('post.unico');

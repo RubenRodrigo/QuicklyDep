@@ -17,7 +17,11 @@
     <div class="m-4 justify-content-md-center">        
         <div class="card p-2">
             <a href="{{route('post.unico', ['id'=> $post->id])}}" class="post">
+            @if($post->establishment->imagen)
                 <img src="{{ Storage::url($post->establishment->imagen[0]) }}" class="card-img-top" alt="...">
+            @else
+                <h3>No tienes imagenes</h3>
+            @endif                
                 <div class="card-body informacion">
                     <h4 class="card-title">S/. {{$post->establishment->precio}}</h4>
                     

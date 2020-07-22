@@ -7,16 +7,21 @@
         @php
           $aux = 1
         @endphp
-        @foreach($data['post']->establishment->imagen as $imagen)                
+        @foreach($data['post']->establishment->imagen as $imagen)
+          @if($imagen)
           <div class="imagen-post-unico"  id="imagen{{$aux}}">
             <a target="_blank" href="{{ Storage::url($imagen) }}">
             <img class="img-fluid" src="{{ Storage::url($imagen) }}" class="card-img-top" alt="...">
             </a>
-          </div>
+          </div>          
+          @endif
         @php
           $aux = $aux +1 
         @endphp
         @endforeach
+        @if($data['post']->establishment->imagen == [])
+          <h3>No tienes imagenes</h3>
+        @endif
       </div>        
       <div class="informacion-post-unico">
         <div class="postHeader">

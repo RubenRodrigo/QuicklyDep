@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use App\Http\Resources\Post as PostResources;
 
 
 class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show', 'showPostVentaAlquiler']);
+        $this->middleware('auth')->except(['index', 'show', 'showPostVentaAlquiler', 'indexAPI']);
     }
 
     public function index(Request $request)
@@ -25,14 +26,18 @@ class PostController extends Controller
 
         //Revisamos que el valor de búsqueda contenga un valor para controlar los resultados expuestos:
         if($query==""){
-            $posts = Post::paginate(6);
+            $posts = Post::orderBy('created_at', 'desc')->paginate(6);
         }else{
-            $posts = Post::where('nombre', 'LIKE', '%' . $query . '%')->paginate(6);
+            $posts = Post::where('nombre', 'LIKE', '%' . $query . '%')->orderBy('created_at', 'desc')->paginate(6);
         }        
         //Retornamos la vista con los elementos correspondientes a la búsqueda y el valor de la búsqueda:
         return view('posts.index', compact('posts'));
     }
 
+    public function indexAPI(){
+        $post = Post::all();
+        return PostResources::collection($post);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -95,18 +100,6 @@ class PostController extends Controller
             $imageName4      = $request->file('image4')->store('posts/', 'public');
             $image[] = $imageName4;
         }
-        if ($request->file('image5')) {
-            $imageName5      = $request->file('image5')->store('posts/', 'public');
-            $image[] = $imageName5;
-        }
-        if ($request->file('image6')) {
-            $imageName6      = $request->file('image6')->store('posts/', 'public');
-            $image[] = $imageName6;
-        }
-        if ($request->file('image7')) {
-            $imageName7      = $request->file('image7')->store('posts/', 'public');
-            $image[] = $imageName7;
-        }
         // $image = array();
         // foreach ($request->file('image') as $imageName){
         //     $imageFile = $imageName->store('posts/', 'public');;
@@ -151,8 +144,17 @@ class PostController extends Controller
         $feature->piscina       = $pool;
         $feature->otros         = $other;
         $establishment->features()->save($feature);
-
-        return redirect('/');
+        
+        $data['post'] = $post;
+        $distrito = $data['post']->establishment->distrito;        
+        $tipo = $data['post']->tipo;
+        
+        $data['postsRecomendados'] = 
+        $posts = Post::whereHas('establishment', function($q) use ($distrito){
+            $q->where('distrito', $distrito);
+        }
+        )->where('tipo', $tipo)->whereNotIn('_id', [$data['post']->id])->orderBy('created_at', 'desc')->take(3)->get();
+        return view('posts.postUnico',['data'=>$data]);
     }
 
     /**
@@ -186,12 +188,12 @@ class PostController extends Controller
             $posts = Post::whereHas('establishment', function($q) use ($distrito){
                 $q->where('distrito', $distrito);
             }
-            )->where('tipo', $tipo)->paginate();
+            )->where('tipo', $tipo)->orderBy('created_at', 'desc')->paginate();
 
             return view('posts.index', compact('posts'));
         } else {
             
-            $posts = Post::where('tipo', $tipo)->paginate(6);
+            $posts = Post::where('tipo', $tipo)->orderBy('created_at', 'desc')->paginate(6);
             
             return view('posts.index', compact('posts'));
         }        
@@ -228,24 +230,23 @@ class PostController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            // Campos del modelo Post
-            'name' => 'required:max:120',            
-            'description'=> 'required:max:2200',
-            // 'type'=>'not_in:x',
+            // // Campos del modelo Post
+            'name' => 'max:120',            
+            'description'=> 'max:2200',            
             // Campos del modelo Establishement
-            'price'=> 'required|numeric|gt:0',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            // 'country'=> 'not_in:x',
-            // 'city'=> 'not_in:x',
-            'district'=> 'required',
-            'adress'=> 'required',
+            'price'=> 'numeric|gt:0',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',            
+            'district'=> 'max:120',
+            'adress'=> 'max:120',
             // Campos del modelo Feature
-            // 'bathroom' => 'not_in:x',
-            // 'bedroom' => 'not_in:x',
-            // 'garage' => 'not_in:x',
-            // 'pool' => 'not_in:x',            
+            'other'=> 'max:2200'
+
         ]);
         
+        $post_id        = $request->get('post_id');
+        $post = Post::find($post_id);
+        $establishment = Establishment::find($post->establishment->id);        
+
         // Campos del modelo Post
         $name           = $request->get('name');        
         $description    = $request->get('description');
@@ -253,11 +254,71 @@ class PostController extends Controller
 
         // Campos del modelo Establishement
         $price          = $request->get('price');
-        $imageName      = $request->file('image')->store('posts/', 'public');
+        
+        $image = array();
+        
+        if ($request->file('image1')){
+            $imageName1      = $request->file('image1')->store('posts/', 'public');
+            $image[] = $imageName1;            
+        }
+        else{            
+            $imageName1      = $establishment->imagen[0];
+            $image[] = $imageName1;
+            
+        }
+
+        if ($request->file('image2')) {
+            $imageName2      = $request->file('image2')->store('posts/', 'public');
+            $image[] = $imageName2;
+        }
+        else{
+            if (isset($establishment->imagen[1])) {
+                $imageName2      = $establishment->imagen[1];
+                $image[] = $imageName2;
+            }
+            
+        }
+
+        if ($request->file('image3')) {
+            $imageName3      = $request->file('image3')->store('posts/', 'public');
+            $image[] = $imageName3;
+        }
+        else{
+            if (isset($establishment->imagen[2])){
+                $imageName3      = $establishment->imagen[2];
+                $image[] = $imageName3; 
+            }                        
+            
+        }
+
+        if ($request->file('image4')) {
+            $imageName4      = $request->file('image4')->store('posts/', 'public');
+            $image[] = $imageName4;
+        }
+        else{            
+            if (isset($establishment->imagen[3])) {
+                $imageName4      = $establishment->imagen[3];
+                $image[] = $imageName4;
+            }
+            
+        }
+
+        if ($request->file('image5')) {
+            $imageName5      = $request->file('image5')->store('posts/', 'public');
+            $image[] = $imageName5;
+        }
+        else{            
+            if(isset($establishment->imagen[4])){
+                $imageName5      = $establishment->imagen[4];
+                $image[] = $imageName5; 
+            }
+            
+        }
+
+        
         $city           = $request->get('city');
         $district       = $request->get('district');
-        $direccion      = $request->get('adress');
-        $post_id        = $request->get('post_id');
+        $direccion      = $request->get('adress');        
         
         // Campos del modelo Feature
         $bathroom       = $request->get('bathroom');
@@ -265,20 +326,20 @@ class PostController extends Controller
         $garage         = $request->get('garage');
         $pool           = $request->get('pool');
         $other          = $request->get('other');
-
-        $post = Post::find($post_id);
+        
+        
+        
         $post->nombre = $name;
         $post->descripcion = $description;
         $post->tipo = $type;
         $post->save();
-
-        $establishment = Establishment::find($post->establishment->id);        
+        
         $establishment->pais        = "Perú";
         $establishment->ciudad      = $city;
         $establishment->distrito    = $district;
         $establishment->direccion   = $direccion;        
         $establishment->precio      = $price;
-        $establishment->imagen      = $imageName;
+        $establishment->imagen      = $image;
         $establishment->save();
 
         $features = $establishment->features;
@@ -289,9 +350,19 @@ class PostController extends Controller
             $feature->piscina       = $pool;
             $feature->otros         = $other;
             $feature->save();
-        }        
+        }
 
-        return view('posts.postUnico',['post' => Post::find($post_id)]);
+        $data['post'] = Post::find($post_id);
+        $distrito = $data['post']->establishment->distrito;        
+        $tipo = $data['post']->tipo;
+        
+        $data['postsRecomendados'] = 
+        $posts = Post::whereHas('establishment', function($q) use ($distrito){
+            $q->where('distrito', $distrito);
+        }
+        )->where('tipo', $tipo)->whereNotIn('_id', [$data['post']->id])->orderBy('created_at', 'desc')->take(3)->get();
+
+        return view('posts.postUnico',['data'=>$data]);
     }
 
     /**
@@ -315,7 +386,7 @@ class PostController extends Controller
     public function userPosts()
     {
         $user_id = Auth::id();        
-        $posts = Post::where('user_id', '=', $user_id)->get();
+        $posts = Post::where('user_id', '=', $user_id)->orderBy('created_at', 'desc')->get();
         return view('posts.misPosts', compact('posts'));
     }
 }
