@@ -19,6 +19,7 @@ class Post extends JsonResource
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
             'tipo' => $this->tipo,
+            'establecimientos' => $this->establishment,
         ];
     }
 }

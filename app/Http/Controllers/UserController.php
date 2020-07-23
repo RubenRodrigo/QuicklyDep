@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
-use Validator;
-use Image;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
@@ -46,13 +44,10 @@ class UserController extends Controller
 
     public function update_avatar(Request $request)
     {
-        if($request->hasFile('avatar')){
-            $avatar = $request->file('avatar');
-            $filename = time() . '.' . $avatar->getClientOriginalExtension();
-            Image::make($avatar)->resize(300, 300)->save('/home/ubuntu/Workplace/Laravel/QuicklyDep/public/storage/posts/' . $filename );
-
+        if($request->hasFile('avatar')){            
+            $avatar = $request->file('avatar')->store('users/', 'public');
             $user = Auth::user();
-            $user->avatar ='posts/' . $filename;
+            $user->avatar =$avatar;
             $user->save();
         }
 
