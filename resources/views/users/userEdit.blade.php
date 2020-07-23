@@ -29,18 +29,16 @@
                 <input type="email" class="form-control" name="email" value="{{$user->email}}" placeholder="Escribe tu email">
             </div>
             <div class="form-group">
-                <label for="image">Imagen de perfil</label>
-                <div class="col-sm-12">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input{{ $errors->has('image') ? ' is-invalid':'' }}" id="image" name="image">
-                        <label class="custom-file-label" for="customFile">{{__('Escoge una imagen')}}</label>
-
-                        @if ($errors->has('image'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('image')}}</strong>
-                                </span>
-                        @endif
-                    </div>
+                <div class="row imagenEditar p-0 pb-4">
+                    @isset(Auth::user()->img_profile)
+                    <img id="output" src="{{ Storage::url(Auth::user()->img_profile) }}" class="card-img-top" alt="...">
+                    @else
+                    <img id="output" src="https://static.vecteezy.com/system/resources/previews/000/550/731/non_2x/user-icon-vector.jpg" class="card-img-top" alt="...">
+                    @endisset
+                    <label class="file-imagen">
+                        <input name="image" type="file" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" style="color: transparent">
+                        Añadir Foto
+                    </label>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>

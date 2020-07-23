@@ -30,28 +30,11 @@ class UserController extends Controller
 
         $usuario->name = $request->get('name');
         $usuario->email = $request->get('email');
+        $usuario->img_profile = $request->file('image')->store('users/', 'public');
         
         $usuario->update();
 
         return redirect('/home');
-    }
-
-    public function profile($id)
-    {
-        $user = User::find($id);
-        return view('users.profile', array('user' => User::find($id)) );
-    }
-
-    public function update_avatar(Request $request)
-    {
-        if($request->hasFile('avatar')){            
-            $avatar = $request->file('avatar')->store('users/', 'public');
-            $user = Auth::user();
-            $user->avatar =$avatar;
-            $user->save();
-        }
-
-        return view('users.profile', array('user' => Auth::user()) );
     }
 
     /*public function destroy(user $user)

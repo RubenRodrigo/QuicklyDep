@@ -163,7 +163,11 @@
             <div class="col-md-6 p-3 pr-5">
               <div class="row m-0">
                 <div class="col-md-2 p-1">
-                  <img src="" alt="">
+                  @isset($comment->user->img_profile)
+                  <img src="{{Storage::url($comment->user->img_profile)}}" alt="" style="width:72px; height:72px; top:10px; left:10px; border-radius:50%">
+                  @else
+                  <img src="https://static.vecteezy.com/system/resources/previews/000/550/731/non_2x/user-icon-vector.jpg" alt="" style="width:72px; height:72px; top:10px; left:10px; border-radius:50%">
+                  @endisset
                 </div>
                 <div class="col-md-10 p-3">
                   <h5 class="m-0"><b>{{ $comment->user->name }}</b></h5>
