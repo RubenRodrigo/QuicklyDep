@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
-use Validator;
-use Image;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
@@ -32,31 +30,11 @@ class UserController extends Controller
 
         $usuario->name = $request->get('name');
         $usuario->email = $request->get('email');
+        $usuario->img_profile = $request->file('image')->store('users/', 'public');
         
         $usuario->update();
 
         return redirect('/home');
-    }
-
-    public function profile($id)
-    {
-        $user = User::find($id);
-        return view('users.profile', array('user' => User::find($id)) );
-    }
-
-    public function update_avatar(Request $request)
-    {
-        if($request->hasFile('avatar')){
-            $avatar = $request->file('avatar');
-            $filename = time() . '.' . $avatar->getClientOriginalExtension();
-            Image::make($avatar)->resize(300, 300)->save('/home/ubuntu/Workplace/Laravel/QuicklyDep/public/storage/posts/' . $filename );
-
-            $user = Auth::user();
-            $user->avatar ='posts/' . $filename;
-            $user->save();
-        }
-
-        return view('users.profile', array('user' => Auth::user()) );
     }
 
     /*public function destroy(user $user)
