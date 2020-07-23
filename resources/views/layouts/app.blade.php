@@ -71,14 +71,14 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="{{ Storage::url( Auth::user()->avatar) }}" style="width:32px; height:32px; top:10px; left:10px; border-radius:50%">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    @isset(Auth::user()->img_profile)
+                                    {{ Auth::user()->name }} <img src="{{ Storage::url( Auth::user()->img_profile) }}" style="width:32px; height:32px; top:10px; left:10px; border-radius:50%"><span class="caret"></span>
+                                    @else
+                                    {{ Auth::user()->name }} <img src="https://static.vecteezy.com/system/resources/previews/000/550/731/non_2x/user-icon-vector.jpg" style="width:32px; height:32px; top:10px; left:10px; border-radius:50%"><span class="caret"></span>
+                                    @endisset
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('users.profile', Auth::user()->id) }}">
-                                        {{ __('Perfil') }}
-                                    </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -87,7 +87,7 @@
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('users.edit', Auth::user()->id) }}">
-                                        {{ __('Editar') }}
+                                        {{ __('Perfil') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
