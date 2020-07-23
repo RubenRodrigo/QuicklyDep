@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Jenssegers\Mongodb\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Boytunghc\LaravelMongoNotifiable\Notifiable;
 
 class User extends Authenticatable
 {

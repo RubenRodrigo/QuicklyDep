@@ -28,6 +28,9 @@ Route::get('/post/{id}', 'PostController@show')->name('post.unico');
 # Prueba de Api
 Route::get('/prueba/python' ,'CheckController@api')->name('prueba.api');
 
+# Notificaciones
+Route::get('/notifications/{id}','UserController@showNotifications');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
