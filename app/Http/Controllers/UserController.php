@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 
@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index','show']);
+        $this->middleware('auth')->except(['index','show', 'tipoUser']);
     }
 
     public function edit($id)
@@ -30,6 +30,7 @@ class UserController extends Controller
 
         $usuario->name = $request->get('name');
         $usuario->email = $request->get('email');
+
         //Comprobamos que el usuario haya designado una imagen para cambiar y, de esa manera, controlar los errores.
         if($request->file('image') != null){
             $usuario->img_profile = $request->file('image')->store('users/', 'public');
@@ -40,12 +41,19 @@ class UserController extends Controller
         return redirect('/home');
     }
 
+    public function tipoUser($email)
+    {
+        if(DB::table('users')->where('email','=',$email)->get()){
+            $user = DB::table('users')->where('email','=',$email)->get();
+            return $user;
+        }
+    }
+    
     public function showNotifications($id)
     {
         $user = User::find($id);
         return view('users.notification',['notifications'=>$user->notifications]);
     }
-
     /*public function destroy(user $user)
     {
         $user_id = Auth::id();

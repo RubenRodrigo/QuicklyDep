@@ -88,6 +88,17 @@
                 <h6>{{ $features->otros }}</h6>
               </div>
             </div>
+            
+            @auth
+            @if(Auth::user()->tipo == "Premiun")            
+            <div class="row p-0 m-0 mb-3">                    
+              <div class="col-md-11 p-0">
+                <h5><b>ID de la Publicacion</b></h5>
+                <h6>{{ $data['post']->id}}</h6>
+              </div>
+            </div>
+            @endif
+            @endauth
           </div>
           <div class="descripcion">
             <h4><b>Descripcion</b></h4>
