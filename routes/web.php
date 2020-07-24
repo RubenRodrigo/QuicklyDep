@@ -1,6 +1,7 @@
 <?php
 
 Route::redirect('/', '/posts');
+Route::redirect('/home', '/posts');
 Route::get('/posts', 'PostController@index')->name('posts.search');
 Route::get('/posts/create', 'PostController@create');
 # Crear Post
@@ -33,7 +34,7 @@ Route::get('/notifications/{id}','UserController@showNotifications');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 //Rutas de usuarios
 Route::patch('/users/{id}', 'UserController@update')->name('users.update');

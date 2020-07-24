@@ -27,7 +27,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex flex-column bd-highlight">
             <div class="container bd-highlight">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ Storage::url('iconos/Logo.png') }}" height="60px">                    
+                    <img src="{{ asset('img//Logo.png') }}" height="60px">                    
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -38,7 +38,7 @@
 
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav col-md-8">                        
-                        <form class="col-md-12 row p-0 m-0" method="GET" action="{{ route('posts.search')}}">
+                        <form class="col-md-12 row p-0 m-0 busqueda" method="GET" action="{{ route('posts.search')}}">
                             <!-- Se controla que la variable search exista-->                            
                             <div class="col-md-8">                                
                                 <input class="form-control form-control-navbar" name="search" type="search" placeholder="Que desea buscar?" aria-label="Search">
@@ -88,9 +88,10 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 
                                     @isset(Auth::user()->img_profile)
-                                    {{ Auth::user()->name }} <img src="{{ Storage::url( Auth::user()->img_profile) }}" style="width:32px; height:32px; top:10px; left:10px; border-radius:50%"><span class="caret"></span>
+                                    
+                                    <img src="{{ Storage::url( Auth::user()->img_profile) }}" style="width:32px; height:32px; top:10px; left:10px; border-radius:50%"><span class="caret"></span>
                                     @else
-                                    {{ Auth::user()->name }} <img src="https://static.vecteezy.com/system/resources/previews/000/550/731/non_2x/user-icon-vector.jpg" style="width:32px; height:32px; top:10px; left:10px; border-radius:50%"><span class="caret"></span>
+                                     <img src="https://static.vecteezy.com/system/resources/previews/000/550/731/non_2x/user-icon-vector.jpg" style="width:32px; height:32px; top:10px; left:10px; border-radius:50%"><span class="caret"></span>
                                     @endisset
                                 </a>
 

@@ -123,7 +123,7 @@
                 {{--<div class="col-md-12 pb-4">                        
                     <label for="type">Pais</label>
                     <select name="country" id="country" class="form-control">
-                        <option selected value="{{$post->establishment->pais}}">Tu publicacion es de {{$post->establishment->pais}}</option>
+                        <option selected value="{{$post->establishment->pais}}">{{$post->establishment->pais}}</option>
                         <option>Perú</option>
                         <option>Chile</option>
                         <option>Bolivia</option>
@@ -135,10 +135,12 @@
                         <label for="city">{{__('Ciudad')}}</label>
                     </h5>
                     <select name="city" id="city" class="form-control">
-                        <option selected value="{{$post->establishment->ciudad}}">Tu publicacion es de {{$post->establishment->ciudad}}</option>
+                        <option selected value="{{$post->establishment->ciudad}}">{{$post->establishment->ciudad}}</option>
                         <option>Arequipa</option>
                         <option>Lima</option>
                         <option>Puno</option>
+                        <option>Cuzco</option>
+                        <option>Tumbes</option>
                     </select>
                 </div>
 
@@ -146,7 +148,7 @@
                     <h5>
                         <label for="district">{{__('Distrito')}}</label>
                     </h5>
-                    <input id="district" class="form-control{{ $errors->has('district') ? ' is-invalid':'' }}" type="text" name="district" value="Tu publicacion es de {{$post->establishment->distrito}}" placeholder="Distrito">
+                    <input id="district" class="form-control{{ $errors->has('district') ? ' is-invalid':'' }}" type="text" name="district" value="{{$post->establishment->distrito}}" placeholder="Distrito">
                     @if ($errors->has('district'))
                         <span class="invalid-feedback">
                             <strong>{{$errors->first('district')}}</strong>
@@ -158,7 +160,7 @@
                     <h5>
                         <label for="adress">{{__('Direccion')}}</label>
                     </h5>
-                    <input id="adress" class="form-control{{ $errors->has('adress') ? ' is-invalid':'' }}" type="text" name="adress" value="Tu publicacion es de {{ $post->establishment->direccion}}">
+                    <input id="adress" class="form-control{{ $errors->has('adress') ? ' is-invalid':'' }}" type="text" name="adress" value="{{ $post->establishment->direccion}}">
                     @if ($errors->has('adress'))
                         <span class="invalid-feedback">
                             <strong>{{$errors->first('adress')}}</strong>
@@ -171,7 +173,7 @@
                         <label for="type">{{__('Tipo')}}</label>
                     </h5>
                     <select name="type" id="type" class="form-control">
-                        <option selected value="{{$post->tipo}}">Tu publicacion es de {{$post->tipo}}</option>
+                        <option selected value="{{$post->tipo}}">{{$post->tipo}}</option>
                         <option>Alquiler</option>
                         <option>Venta</option>                            
                     </select>
@@ -182,7 +184,7 @@
                     </h5>
                     <select name="bathroom" id="bathroom" class="form-control">
                         @foreach($post->establishment->features as $feature)
-                            <option selected value="{{$feature->baños}}">Tu publicacion es de {{$feature->baños}} baños</option>
+                            <option selected value="{{$feature->baños}}">{{$feature->baños}} baños</option>
                         @endforeach
                         <option>1</option>
                         <option>2</option>
@@ -203,7 +205,7 @@
                     </h5>
                     <select name="bedroom" id="bedroom" class="form-control">
                     @foreach($post->establishment->features as $feature)
-                        <option selected value="{{$feature->dormitorios}}">Tu publicacion es de {{$feature->dormitorios}} dormitorios</option>
+                        <option selected value="{{$feature->dormitorios}}">{{$feature->dormitorios}} dormitorios</option>
                     @endforeach
                         <option>1</option>
                         <option>2</option>
@@ -257,7 +259,7 @@
                 <input type="hidden" name="post_id" value="{{$post->id}}">                
             </div>
             <div class="col-md-12 row justify-content-center">                
-                <button type="submit" class="btn btn-dark btn-lg">
+                <button type="submit" class="btn btn-dark btn-lg" onclick="return confirm('¿Esta seguro de atualizar?')">
                     {{ __('Actualizar publicacion') }}
                 </button>                                    
             </div>

@@ -3,8 +3,6 @@
     grid-template-columns: repeat(4, 1fr);
     margin-right: auto;
     margin-left: auto;
-    max-width: 1450px;
-    min-width: 765px;
 }
 
 .opciones{
@@ -220,17 +218,82 @@ input:focus, textarea:focus, select:focus, button:focus{
     padding: 0;
 }
 
-/* Editar Posts
-.imagenEditar img{
-        width:100%;
-        height: auto;    
-} */
+/* Editar Posts */
+
 .imagenEditar label{   
-    border-top:none !important;    
+    border-top:none !important;
 }
 .imagenEditar img{
     border-radius: 8px;
     object-fit: cover;
     width:100%;
     height:220px;
+}
+
+/* Editar Usuario */
+.imagenPerfil img{
+    border-radius: 8px;
+    object-fit: cover;
+    width:100%;
+    height:220px;
+}
+.imagenPerfil label{   
+    border-top:none !important;
+}
+
+@media only screen and (max-width: 770px) {
+    /* Busqueda */
+    .busqueda div{
+        margin-bottom: 10px;
+    }
+    /* Index */
+    .container-grid{
+        max-width: 750px;
+    }
+    .opciones {
+        display: none;
+    }
+    .contenido {
+        grid-column: 1/5;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .contenido div{
+        margin:0;
+    }
+    .contenido .misPosts{
+        grid-column: 2/3;
+    }
+
+    /* PostUnico */
+    .postUnico{
+        padding:0px;
+    }
+    .imagen-post-unico a img{        
+        height:110px !important;
+    }
+    #imagen1 img{        
+        height:240px !important;        
+    }
+    .icono{
+        width: 30px;
+        padding-bottom: 10px;
+    }
+    
+    /* Crear Publicacion */
+    .imagen img{
+        height: 70px !important;
+    }
+}
+@media only screen and (max-width: 500px) {
+    /* Index */
+    .contenido {
+        grid-column: 1/5;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .misPosts{
+        grid-column: 1/2 !important;
+    }
+    .paginate{
+        grid-column: 1/4;
+    }
 }
