@@ -11,9 +11,6 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         'nombre' => $faker->sentence(5),
         'descripcion' => $faker->paragraph(3),
-        'tipo' => $faker->randomElement($array = array ('Alquiler','Venta')),
-        // 'establecimiento' => function(){
-        //     return factory(Establishment::class)->create();
-        // }
+        'tipo' => $faker->randomElement($array = array ('Alquiler','Venta')),        
     ];
 });

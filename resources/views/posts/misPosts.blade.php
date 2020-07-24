@@ -43,7 +43,7 @@
                         <form method="POST" action="{{ route('post.destroy',$post->id) }}">
                             @csrf
                             @method('DELETE')                
-                            <button class="eliminar" type="submit" onclick="return confirm('Sure Want Delete?')">
+                            <button class="eliminar" type="submit" onclick="return confirm('¿Esta seguro de eliminarlo?')">
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         </form>

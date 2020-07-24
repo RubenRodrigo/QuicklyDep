@@ -45,9 +45,9 @@
                 <h6 class="text-muted">{{ $data['post']->created_at->toFormattedDateString() }}</h6>          
               </div>
             </div>          
-            <div class="row p-0 m-0 mb-3">
+            <div class="row p-0 m-0 mb-3 detalles">
               <div class="col-md-1 p-0 pr-3">
-                <img src="{{ Storage::url('iconos//ubicacion.jpg') }}" class="icono"></img>
+                <img src="{{ asset('img//ubicacion.jpg') }}" class="icono"></img>
               </div>
 
               <div class="col-md-11 p-0">
@@ -56,9 +56,9 @@
               </div>
             </div>
 
-            <div class="row p-0 m-0 mb-3">
+            <div class="row p-0 m-0 mb-3 detalles">
               <div class="col-md-1 p-0 pr-3">
-                <img src="{{ Storage::url('iconos//precio.png') }}" class="icono"></img>
+                <img src="{{ asset('img//precio.png') }}" class="icono"></img>
               </div>
 
               <div class="col-md-11 p-0">
@@ -67,9 +67,9 @@
               </div>
             </div>
 
-            <div class="row p-0 m-0 mb-3">
+            <div class="row p-0 m-0 mb-3 detalles">
               <div class="col-md-1 p-0 pr-3">
-                <img src="{{ Storage::url('iconos//pool.png') }}" class="icono"></img>
+                <img src="{{ asset('img//pool.png') }}" class="icono"></img>
               </div>
 
               <div class="col-md-11 p-0">
@@ -78,9 +78,9 @@
               </div>
             </div>
 
-            <div class="row p-0 m-0 mb-3">
+            <div class="row p-0 m-0 mb-3 detalles">
               <div class="col-md-1 p-0 pr-3">
-                <img src="{{ Storage::url('iconos//otros.png') }}" class="icono"></img>
+                <img src="{{ asset('img//otros.png') }}" class="icono"></img>
               </div>
 
               <div class="col-md-11 p-0">
@@ -91,7 +91,7 @@
             
             @auth
             @if(Auth::user()->tipo == "Premiun")            
-            <div class="row p-0 m-0 mb-3">                    
+            <div class="row p-0 m-0 mb-3">
               <div class="col-md-11 p-0">
                 <h5><b>ID de la Publicacion</b></h5>
                 <h6>{{ $data['post']->id}}</h6>

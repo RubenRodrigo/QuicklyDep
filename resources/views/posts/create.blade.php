@@ -68,6 +68,8 @@
                         <option>Arequipa</option>
                         <option>Lima</option>
                         <option>Puno</option>
+                        <option>Cuzco</option>
+                        <option>Tumbes</option>
                     </select>
                     @if ($errors->has('city'))
                         <span class="invalid-feedback">
