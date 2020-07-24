@@ -16,9 +16,9 @@
             </div>
             <div class="form-group col-md-12 offset-md-1">
                 @if($tipo==='Alquiler')
-                <button class="btn btn-secondary my-2 my-sm-0" disabled><a class="dropdown-item">Alquiler</a></button>
+                <button class="btn btn-secondary my-2 my-sm-0" disabled><a class="dropdown-item">Alquileres</a></button>
                 @else
-                <button class="btn btn-outline-dark my-2 my-sm-0"><a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Alquiler'])}}">Alquiler</a></button>
+                <button class="btn btn-outline-dark my-2 my-sm-0"><a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Alquiler'])}}">Alquileres</a></button>
                 @endif
             </div>       
             @else
@@ -26,7 +26,7 @@
                 <button class="btn btn-outline-dark my-2 my-sm-0"><a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Venta'])}}">Ventas</a></button>
             </div>
             <div class="form-group col-md-12 offset-md-1">
-                <button class="btn btn-outline-dark my-2 my-sm-0"><a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Alquiler'])}}">Alquiler</a></button>
+                <button class="btn btn-outline-dark my-2 my-sm-0"><a class="dropdown-item" href="{{route('posts.filtro', ['tipo'=> 'Alquiler'])}}">Alquileres</a></button>
             </div>   
             @endisset 
         </div>
@@ -35,11 +35,12 @@
         <form action="{{route('posts.precio',['precio'=>'100'])}}" method="GET">
             <div class="form-row">
                 <div class="col-md-12">
-                    <h3>Precio</h3>
+                    <h3>Filtrar Precio</h3>
                 </div>     
                 <!--Controlamos los aspectos de filtrado múltiple-->       
                 @isset($precio1)
                 <div class="form-group col-md-6">
+                    <label>Desde: </label>
                     <input type="number" class="form-control" value="{{$precio1}}" name="precio1">
                     @isset($tipo)
                     @if($tipo==='Venta')
@@ -48,6 +49,7 @@
                     @endisset
                 </div>
                 <div class="form-group col-md-6">
+                    <label>Hasta: </label>
                     <input type="number" class="form-control" value="{{$precio2}}" name="precio2">
                     @isset($tipo)
                     @if($tipo==='Alquiler')
@@ -57,6 +59,7 @@
                 </div>
                 @else
                 <div class="form-group col-md-6">
+                    <label>Desde: </label>
                     <input type="number" class="form-control" value="" name="precio1">
                     @isset($tipo)
                     @if($tipo==='Venta')
@@ -65,6 +68,7 @@
                     @endisset
                 </div>
                 <div class="form-group col-md-6">
+                    <label>Hasta: </label>
                     <input type="number" class="form-control" value="" name="precio2">
                     @isset($tipo)
                     @if($tipo==='Alquiler')

@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
 <div class="container container-grid">
     <div class="opciones">
     @include('layouts.filtros')
@@ -35,7 +40,6 @@
                     <p class="card-text ubicacion"><small class="text-muted">{{$post->establishment->ciudad}} - {{$post->establishment->distrito}}</small></p>
                 </div>                                
             </a>
-            <a href="{{route('prueba.api')}}">PRUEBA DE API</a>
         </div>
     </div>
     @endforeach

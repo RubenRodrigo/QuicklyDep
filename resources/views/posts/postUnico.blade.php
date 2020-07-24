@@ -103,7 +103,7 @@
           <div class="descripcion">
             <h4><b>Descripcion</b></h4>
             <p class="h5 mb-5">{{ $data['post']->descripcion }}</p>
-            <h6><b><a href="">Ponte en contacto con el dueño</a></b></h6>
+            <h6><b><a href="{{route('contact',['id'=>$data['post']->id])}}">Ponte en contacto con el dueño</a></b></h6>
           </div>                                                   
         </div>
       </div>

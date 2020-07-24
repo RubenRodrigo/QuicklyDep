@@ -55,8 +55,8 @@ class PostController extends Controller
     public function showPostFiltroPrecio(Request $request)
     {
         //Obtenemos las variables de costes para el filtrado:
-        $precio1 = $request->get('precio1');
-        $precio2 = $request->get('precio2');
+        $precio1 = intval($request->get('precio1'));
+        $precio2 = intval($request->get('precio2'));
 
         //Filtramos la información respecto al atributo de precio de los establecimientos:
         $posts = Post::whereHas('establishment', function($q) use ($precio1,$precio2){
@@ -112,7 +112,7 @@ class PostController extends Controller
         $type           = $request->get('type');
 
         // Campos del modelo Establishement
-        $price          = $request->get('price');
+        $price          = intval($request->get('price'));
         $image = array();            
         $imageName      = $request->file('image')->store('posts/', 'public');
         $image[] = $imageName;
@@ -422,5 +422,27 @@ class PostController extends Controller
         $user_id = Auth::id();        
         $posts = Post::where('user_id', '=', $user_id)->orderBy('created_at', 'desc')->get();
         return view('posts.misPosts', compact('posts'));
+    }
+
+    public function contact($id) {
+        $data = array(
+            'name' => "Quicklydep",
+        );
+        Mail::send('contact',$data,function($message) {
+            $message->from(Auth::user()->email,'C');
+            $message->to($id)->subject('Correo de contacto');
+        });
+        return redirect('home')->with('status', '¡Correo de contacto enviado!');
+    }
+
+    public function sendContact($id) {
+        $data = array(
+            'name' => "Quicklydep",
+        );
+        Mail::send('contact',$data,function($message) {
+            $message->from(Auth::user()->email,'C');
+            $message->to($id)->subject('Correo de contacto');
+        });
+        return redirect('home')->with('status', '¡Correo de contacto enviado!');
     }
 }
