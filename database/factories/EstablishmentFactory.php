@@ -42,7 +42,7 @@ $factory->define(Establishment::class, function (Faker $faker) {
         'ciudad' => "Arequipa",
         'distrito' => $faker->randomElement($distritos),
         'direccion' => $faker->address(),        
-        'precio' => $faker->numberBetween($min = 0),
+        'precio' => $faker->numberBetween($min = 0, $max = 1000000),
         'imagen' => $imagenes,
     ];
 });
