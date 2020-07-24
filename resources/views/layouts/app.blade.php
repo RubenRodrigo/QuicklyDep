@@ -91,7 +91,7 @@
                                     
                                     <img src="{{ Storage::url( Auth::user()->img_profile) }}" style="width:32px; height:32px; top:10px; left:10px; border-radius:50%"><span class="caret"></span>
                                     @else
-                                     <img src="https://static.vecteezy.com/system/resources/previews/000/550/731/non_2x/user-icon-vector.jpg" style="width:32px; height:32px; top:10px; left:10px; border-radius:50%"><span class="caret"></span>
+                                     {{Auth::user()->name}}<img src="https://static.vecteezy.com/system/resources/previews/000/550/731/non_2x/user-icon-vector.jpg" style="width:32px; height:32px; top:10px; left:10px; border-radius:50%"><span class="caret"></span>
                                     @endisset
                                 </a>
 

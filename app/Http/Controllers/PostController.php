@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use App\Establishment;
 use App\Feature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\Mail;
 
 use App\Http\Resources\Post as PostResources;
 use Illuminate\Support\Facades\DB;
@@ -424,25 +426,20 @@ class PostController extends Controller
         return view('posts.misPosts', compact('posts'));
     }
 
-    public function contact($id) {
+    public function contactMail($id){
+        $post = Post::find($id);
+        $user_id = $post->user_id;
+        $post_email = User::find($user_id)->email;
+        
         $data = array(
             'name' => "Quicklydep",
+            'post_id' => $id,
         );
-        Mail::send('contact',$data,function($message) {
+        Mail::send('contact',$data,function($message) use($post_email){
             $message->from(Auth::user()->email,'C');
-            $message->to($id)->subject('Correo de contacto');
+            $message->to($post_email)->subject('Correo de contacto');
         });
-        return redirect('home')->with('status', '¡Correo de contacto enviado!');
+        return redirect('/')->with('status', '¡Correo de contacto enviado!');
     }
 
-    public function sendContact($id) {
-        $data = array(
-            'name' => "Quicklydep",
-        );
-        Mail::send('contact',$data,function($message) {
-            $message->from(Auth::user()->email,'C');
-            $message->to($id)->subject('Correo de contacto');
-        });
-        return redirect('home')->with('status', '¡Correo de contacto enviado!');
-    }
 }

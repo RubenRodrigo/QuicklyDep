@@ -32,6 +32,9 @@ Route::get('/prueba/python' ,'CheckController@api')->name('prueba.api');
 # Notificaciones
 Route::get('/notifications/{id}','UserController@showNotifications');
 
+#Ruta de contacto por mail
+Route::get('/sendmail/{id}', 'PostController@contactMail')->name('contact');
+
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
@@ -40,6 +43,3 @@ Auth::routes();
 Route::patch('/users/{id}', 'UserController@update')->name('users.update');
 Route::get('/users/{id}/edit', 'UserController@edit')->name('users.edit');
 Route::get('/users/{id}/profile', 'UserController@profile')->name('users.profile');
-
-#Ruta de contacto por mail
-Route::get('/sendmail/{id}','PostController@contact')->name('contact');

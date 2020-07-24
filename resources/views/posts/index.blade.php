@@ -40,7 +40,6 @@
                         <p class="card-text ubicacion"><small class="text-muted">{{$post->establishment->ciudad}} - {{$post->establishment->distrito}}</small></p>
                     </div>                                
                 </a>
-                <a href="{{route('prueba.api')}}">PRUEBA DE API</a>
             </div>
         </div>
         @endforeach
