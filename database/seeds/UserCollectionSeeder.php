@@ -13,11 +13,11 @@ class UserCollectionSeeder extends Seeder
      */
     public function run()
     {
-        $users = factory(App\User::class, 10)
+        $users = factory(App\User::class, 20)
             ->create()
             ->each( function ($user){
                 $user->posts()->createMany(
-                    factory(App\Post::class, 2)->make()->toArray()
+                    factory(App\Post::class, 5)->make()->toArray()
                 )
                 ->each( function($post){
                     $post->establishment()->createMany(
@@ -37,7 +37,7 @@ class UserCollectionSeeder extends Seeder
                 'email_verified_at' => now(),                
                 'fecha_nacimiento' => '2015-06-16',
                 'numero' => '916148132',
-                'rol' => 'c',
+                'tipo' => 'Premiun',
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
             ]);

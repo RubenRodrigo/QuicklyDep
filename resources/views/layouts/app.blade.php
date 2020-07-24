@@ -27,7 +27,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex flex-column bd-highlight">
             <div class="container bd-highlight">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ Storage::url('posts/Logo.png') }}" height="60px">                    
+                    <img src="{{ Storage::url('iconos/Logo.png') }}" height="60px">                    
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

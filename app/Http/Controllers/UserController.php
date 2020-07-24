@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
@@ -15,7 +16,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index','show']);
+        $this->middleware('auth')->except(['index','show', 'tipoUser']);
     }
 
     public function edit($id)
@@ -37,6 +38,13 @@ class UserController extends Controller
         return redirect('/home');
     }
 
+    public function tipoUser($email)
+    {
+        if(DB::table('users')->where('email','=',$email)->get()){
+            $user = DB::table('users')->where('email','=',$email)->get();
+            return $user;
+        }
+    }
     /*public function destroy(user $user)
     {
         $user_id = Auth::id();

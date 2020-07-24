@@ -9,14 +9,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+
 use App\Http\Resources\Post as PostResources;
+use Illuminate\Support\Facades\DB;
 
 
 class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show', 'showPostVentaAlquiler','showPostFiltroPrecio', 'indexAPI']);
+        $this->middleware('auth')->except(['index', 'show', 'showPostVentaAlquiler','showPostFiltroPrecio', 'indexAPI', 'showPostAPI']);
     }
 
     public function index(Request $request)
@@ -35,15 +37,20 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
+    // FUNCIONES PARA LA API
     public function indexAPI(){
-        $post = Post::all();
-        return PostResources::collection($post);
+        $posts = Post::all();
+        return PostResources::collection($posts);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function showPostAPI($id)
+    {
+        if(DB::table('establishments')->where('post_id','=',$id)->get()){
+            $establishment = DB::table('establishments')->where('post_id','=',$id)->get();
+            return $establishment;
+        }
+    }
+
 
     public function showPostFiltroPrecio(Request $request)
     {
