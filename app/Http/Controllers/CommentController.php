@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Post;
 use Illuminate\Http\Request;
+use App\User;
+use App\Notifications\InvoicePaid;
 
 class CommentController extends Controller
 {
@@ -51,6 +53,9 @@ class CommentController extends Controller
 
         $post = Post::find($request->get('post_id'));
         $post->comments()->save($comment);
+
+        $user = User::find($post->user_id);
+        $user->notify(new InvoicePaid($comment,$post));
 
         return redirect()->route('post.unico', ['id' => $request->get('post_id')]);
     }
