@@ -30,13 +30,23 @@ class UserController extends Controller
 
         $usuario->name = $request->get('name');
         $usuario->email = $request->get('email');
-        $usuario->img_profile = $request->file('image')->store('users/', 'public');
+
+        //Comprobamos que el usuario haya designado una imagen para cambiar y, de esa manera, controlar los errores.
+        if($request->file('image') != null){
+            $usuario->img_profile = $request->file('image')->store('users/', 'public');
+        };
         
         $usuario->update();
 
         return redirect('/home');
     }
 
+
+    public function showNotifications($id)
+    {
+        $user = User::find($id);
+        return view('users.notification',['notifications'=>$user->notifications]);
+    }
     /*public function destroy(user $user)
     {
         $user_id = Auth::id();
