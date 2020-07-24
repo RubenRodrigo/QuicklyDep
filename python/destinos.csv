@@ -1,0 +1,149 @@
+SN,Origen,Destino,Duracion,Kilometros,Combustible
+1,Ancash,Ancash,00:00:00,0.00,0.00
+2,Ancash,Arequipa,16:56:46,1453.56,144.62
+3,Ancash,Ayacucho,14:23:38,1123.32,116.95
+7,Ancash,Huancavelica,11:19:56,900.03,94.65
+9,Ancash,Ica,08:15:13,740.32,74.54
+10,Ancash,Junin,10:04:29,823.88,83.42
+11,Ancash,La Libertad,03:38:28,290.88,27.52
+17,Ancash,San Martin,10:40:49,715.29,75.15
+
+21,Apurimac,Apurimac,00:00:00,0.00,0.00
+22,Arequipa,Ancash,16:58:54,1456.12,145.27
+23,Arequipa,Arequipa,00:00:00,0.00,0.00
+25,Arequipa,Cajamarca,25:28:13,2031.00,205.14
+26,Arequipa,Callao,12:18:21,1035.08,101.80
+30,Arequipa,Ica,08:45:54,710.70,69.93
+35,Arequipa,Moquegua,03:03:06,165.90,17.16
+38,Arequipa,San Martin,26:07:41,2094.88,210.62
+40,Arequipa,Tumbes,27:01:32,2298.45,227.33
+
+42,Ayacucho,Ancash,14:25:09,1124.86,117.60
+43,Ayacucho,Arequipa,11:25:29,806.58,82.48
+44,Ayacucho,Ayacucho,00:00:00,0.00,0.00
+59,Ayacucho,Tacna,14:56:14,1090.11,109.32
+
+64,Cajamarca,Ayacucho,22:55:21,1703.93,178.64
+63,Cajamarca,Arequipa,25:26:10,2028.36,205.82
+67,Cajamarca,Cusco,28:11:04,2117.38,221.47
+80,Cajamarca,Tumbes,09:58:24,705.21,72.35
+62,Cajamarca,Ancash,10:14:56,719.04,75.49
+
+82,Callao,Ancash,04:50:11,428.30,44.41
+83,Callao,Arequipa,12:22:00,1038.05,103.04
+84,Callao,Ayacucho,09:48:52,707.81,75.34
+97,Callao,Puno,15:48:11,1324.51,131.62
+98,Callao,San Martin,14:01:16,1072.86,109.36
+
+102,Cusco,Ancash,19:41:52,1540.26,158.80
+103,Cusco,Arequipa,06:12:40,490.32,47.82
+109,Cusco,Huanuco,21:18:01,1359.72,145.68
+110,Cusco,Ica,11:31:10,800.65,83.01
+111,Cusco,Junin,15:56:36,960.64,108.52
+
+122,Huancavelica,Ancash,11:20:13,901.60,93.48
+123,Huancavelica,Arequipa,13:34:08,1019.58,101.83
+134,Huancavelica,Lima,06:25:48,462.96,48.61
+135,Huancavelica,Moquegua,16:30:13,1183.07,118.35
+136,Huancavelica,Piura,18:35:15,1508.96,151.16
+140,Huancavelica,Tumbes,21:25:09,1749.73,175.17
+
+142,Huanuco,Ancash,08:24:37,500.17,55.64
+145,Huanuco,Cajamarca,13:32:33,989.18,99.91
+146,Huanuco,Callao,07:06:50,528.67,51.86
+147,Huanuco,Cusco,21:28:04,1348.71,147.46
+148,Huanuco,Huancavelica,09:20:41,665.99,68.23
+149,Huanuco,Huanuco,00:00:00,0.00,0.00
+160,Huanuco,Tumbes,18:58:32,1535.27,151.54
+
+163,Ica,Arequipa,08:44:31,710.04,70.08
+164,Ica,Ayacucho,06:13:42,385.60,42.90
+165,Ica,Cajamarca,16:47:09,1322.67,135.63
+166,Ica,Callao,03:34:59,320.96,32.73
+168,Ica,Huancavelica,04:54:19,311.88,35.00
+169,Ica,Huanuco,10:05:47,808.57,81.04
+174,Ica,Lima,03:21:07,303.35,31.30
+180,Ica,Tumbes,18:20:28,1590.13,157.85
+
+182,Junin,Ancash,10:04:26,820.73,81.38
+184,Junin,Ayacucho,10:37:26,635.78,68.08
+185,Junin,Cajamarca,18:36:03,1401.41,140.84
+188,Junin,Huancavelica,05:16:52,330.93,34.06
+191,Junin,Junin,00:00:00,0.00,0.00
+192,Junin,La Libertad,11:59:57,973.36,95.10
+193,Junin,Lambayeque,15:35:31,1213.28,119.41
+
+202,La Libertad,Ancash,03:38:40,291.18,29.56
+203,La Libertad,Arequipa,18:52:13,1606.31,160.39
+206,La Libertad,Callao,06:44:29,580.33,58.48
+207,La Libertad,Cusco,21:34:48,1689.53,175.51
+208,La Libertad,Huancavelica,13:15:23,1052.78,110.38
+209,La Libertad,Huanuco,10:48:44,839.82,86.79
+210,La Libertad,Ica,10:10:40,893.08,90.27
+213,La Libertad,Lambayeque,05:26:59,351.12,35.8
+
+224,Lambayeque,Ayacucho,19:54:01,1518.15,156.95
+225,Lambayeque,Cajamarca,05:48:12,279.54,31.75
+226,Lambayeque,Callao,10:19:25,822.41,82.71
+227,Lambayeque,Cusco,25:09:44,1931.60,199.77
+239,Lambayeque,Tacna,25:55:35,2126.12,210.96
+240,Lambayeque,Tumbes,07:05:25,529.59,52.16
+
+242,Lima,Ancash,04:56:40,435.00,44.98
+243,Lima,Arequipa,12:10:17,1017.88,101.30
+244,Lima,Ayacucho,09:37:09,687.65,73.63
+245,Lima,Cajamarca,13:28:17,1015.68,104.44
+246,Lima,Callao,00:16:07,13.96,1.55
+248,Lima,Huancavelica,06:33:27,464.35,51.33
+249,Lima,Huanuco,06:57:42,516.67,51.33
+250,Lima,Ica,03:28:44,304.65,31.22
+251,Lima,Junin,05:19:33,392.64,40.45
+258,Lima,San Martin,14:07:45,1079.56,109.92
+259,Lima,Tacna,15:41:02,1301.41,128.14
+260,Lima,Tumbes,15:01:36,1283.13,126.63
+
+262,Moquegua,Ancash,19:55:16,1619.65,164.43
+263,Moquegua,Arequipa,03:04:55,168.23,19.84
+264,Moquegua,Ayacucho,14:21:57,970.82,102.51
+265,Moquegua,Cajamarca,28:24:35,2194.53,224.31
+275,Moquegua,Moquegua,00:00:00,0.00,0.00
+277,Moquegua,Puno,04:12:13,288.92,30.58
+
+282,Pasco,Pasco,00:00:00,0.00,0.00
+283,Piura,Ancash,08:58:00,748.07,74.09
+284,Piura,Arequipa,24:11:33,2063.20,204.91
+285,Piura,Ayacucho,22:29:33,1811.04,184.20
+286,Piura,Cajamarca,06:35:17,422.79,44.64
+287,Piura,Callao,12:03:49,1037.22,103.04
+288,Piura,Cusco,26:54:08,2146.41,220.07
+292,Piura,Junin,17:19:16,1433.52,143.72
+
+303,Puno,Ancash,20:24:15,1740.52,172.86
+304,Puno,Arequipa,03:35:18,291.71,28.54
+305,Puno,Ayacucho,13:31:58,876.25,90.61
+306,Puno,Cajamarca,28:55:52,2321.20,232.32
+307,Puno,Callao,15:43:42,1319.48,129.43
+312,Puno,Junin,19:58:29,1554.26,154.11
+
+323,San Martin,Ancash,10:41:12,715.31,74.77
+324,San Martin,Arequipa,23:42:41,1902.60,187.87
+325,San Martin,Ayacucho,21:11:52,1578.16,160.73
+330,San Martin,Huanuco,05:23:09,403.37,38.90
+339,San Martin,San Martin,00:00:00,0.00,0.00
+341,San Martin,Tumbes,14:23:47,1145.72,112.98
+343,Tacna,Ancash,20:28:44,1739.26,173.39
+
+348,Tacna,Cusco,10:40:48,849.75,84.33
+349,Tacna,Huancavelica,17:05:13,1303.35,132.60
+350,Tacna,Huanuco,22:16:41,1800.04,
+357,Tacna,Piura,27:43:46,2346.63,231.03
+400,Tacna,Ucayali,24:29:34,2211.34,233.79
+
+366,Tumbes,Cajamarca,09:59:30,705.33,72.42
+367,Tumbes,Callao,14:53:16,1277.88,126.67
+368,Tumbes,Cusco,29:43:35,2387.08,243.70
+369,Tumbes,Huancavelica,21:24:10,1750.33,178.57
+373,Tumbes,La Libertad,10:01:53,809.05,79.76
+
+400,Ucayali,Tacna,24:29:34,2211.34,233.79
+399,Ucayali,San Martin,53:15:09,4561.97,467.55
