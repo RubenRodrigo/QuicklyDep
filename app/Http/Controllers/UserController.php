@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 

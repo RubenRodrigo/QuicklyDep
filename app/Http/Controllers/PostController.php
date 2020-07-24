@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use App\Establishment;
 use App\Feature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\Mail;
 
 use App\Http\Resources\Post as PostResources;
 use Illuminate\Support\Facades\DB;
@@ -55,8 +57,8 @@ class PostController extends Controller
     public function showPostFiltroPrecio(Request $request)
     {
         //Obtenemos las variables de costes para el filtrado:
-        $precio1 = $request->get('precio1');
-        $precio2 = $request->get('precio2');
+        $precio1 = intval($request->get('precio1'));
+        $precio2 = intval($request->get('precio2'));
 
         //Filtramos la información respecto al atributo de precio de los establecimientos:
         $posts = Post::whereHas('establishment', function($q) use ($precio1,$precio2){
@@ -112,7 +114,7 @@ class PostController extends Controller
         $type           = $request->get('type');
 
         // Campos del modelo Establishement
-        $price          = $request->get('price');
+        $price          = intval($request->get('price'));
         $image = array();            
         $imageName      = $request->file('image')->store('posts/', 'public');
         $image[] = $imageName;
@@ -423,4 +425,21 @@ class PostController extends Controller
         $posts = Post::where('user_id', '=', $user_id)->orderBy('created_at', 'desc')->get();
         return view('posts.misPosts', compact('posts'));
     }
+
+    public function contactMail($id){
+        $post = Post::find($id);
+        $user_id = $post->user_id;
+        $post_email = User::find($user_id)->email;
+        
+        $data = array(
+            'name' => "Quicklydep",
+            'post_id' => $id,
+        );
+        Mail::send('contact',$data,function($message) use($post_email){
+            $message->from(Auth::user()->email,'C');
+            $message->to($post_email)->subject('Correo de contacto');
+        });
+        return redirect('/')->with('status', '¡Correo de contacto enviado!');
+    }
+
 }

@@ -35,7 +35,7 @@
         <form action="{{route('posts.precio',['precio'=>'100'])}}" method="GET">
             <div class="form-row">
                 <div class="col-md-12">
-                    <h3>Precio</h3>
+                    <h3>Filtrar Precio</h3>
                 </div>     
                 <!--Controlamos los aspectos de filtrado múltiple-->       
                 @isset($precio1)
